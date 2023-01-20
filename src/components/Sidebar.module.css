@@ -1,0 +1,19 @@
+.sidebar{
+    width: 20%;
+    height:100vh;
+    background-color:rgb(11, 56, 180);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.exitDiv{
+color: white;
+font-size: 20px;
+padding: 40px;
+}
+.exitLogo{
+    width: 35px;
+    height: 35px;
+}

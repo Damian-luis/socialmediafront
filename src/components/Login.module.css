@@ -1,0 +1,22 @@
+.container{
+    background-color:rgb(11, 56, 180);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formContainer{
+    width: 30%;
+    border-radius:20px;
+    background-color: white;
+    margin: 20px;
+}
+Form{
+    background-color:white;
+    border-radius: 20px;
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
