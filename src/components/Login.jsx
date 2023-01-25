@@ -28,7 +28,7 @@ export const Login=()=>{
         await axios.post(`${process.env.REACT_APP_URL_BACKEND}users/login`,user).then(e=>{
             dispatch(addSesion({
                 mail:user.mail,
-                password:user.password,
+                password:user.password, 
                 isLoggedIn:true,
                 id:e.data.user[0].id  
             }))
