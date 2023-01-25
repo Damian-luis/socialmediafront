@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
- mail:"",
- password:"",
- id:"",
- isLoggedIn:false
+ misPublicaciones: [],
+ publicacionesAmigos:[]
 }
 
-export const userSlice = createSlice({
-  name: 'users',
+export const dataSlice = createSlice({
+  name: 'data',
   initialState,
   reducers: {
     increment: (state) => {
@@ -24,21 +22,14 @@ export const userSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.value += action.payload
     },
-    addSesion:(state,action)=>{
-        state.mail=action.payload.mail
-        state.password=action.payload.password
-        state.isLoggedIn=action.payload.isLoggedIn
-        state.id=action.payload.id
-    },
-    finishSesion:(state)=>{
-        state.mail=""
-        state.password=""
-        state.isLoggedIin=false
+    getPostData:(state,action)=>{
+        state.misPublicaciones=action.payload.misPublicaciones
+        state.publicacionesAmigos=action.payload.publicacionesAmigos
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount,addSesion,finishSesion } = userSlice.actions
+export const { increment, decrement, incrementByAmount,getPostData } = dataSlice.actions
 
-export default userSlice.reducer
+export default dataSlice.reducer

@@ -1,0 +1,10 @@
+.app{
+    box-sizing: border-box;
+    display: flex;
+  }
+.containerPrincipal{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

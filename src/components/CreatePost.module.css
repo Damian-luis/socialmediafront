@@ -1,0 +1,17 @@
+.formContainer{
+    background-color:rgb(170, 169, 169);
+    height: 100px;
+    width: 50%;
+    border-radius: 20px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.form{
+    color: white;
+}
+.form input{
+    border-radius: 15px;
+    padding: 10px 50px;
+    border: none;
+}
