@@ -24,6 +24,7 @@ export const Login=()=>{
         }
     const submitHandler=async(e)=>{
         e.preventDefault()
+        console.log(process.env.REACT_APP_URL_BACKEND)
         await axios.post(`${process.env.REACT_APP_URL_BACKEND}users/login`,user).then(e=>{
             dispatch(addSesion({
                 mail:user.mail,
