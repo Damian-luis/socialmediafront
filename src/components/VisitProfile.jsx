@@ -15,7 +15,7 @@ export const VisitProfile=()=>{
   const [post,setPost] = useState(false)
   const [publicacion,setPublicaciones]=useState()
   const getData=async()=>{
-    await axios.get(`${process.env.REACT_APP_URL_BACKEND}users/user/`+id).then(e=>{
+    await axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/user/`+id).then(e=>{
           setDataUser({...dataUser,
             name:e.data.dataBasica[0].name,
             lastname:e.data.dataBasica[0].lastname,

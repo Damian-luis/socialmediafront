@@ -9,7 +9,7 @@ export const Friends=()=>{
   const id = useSelector(state=>state.user.id)
   const [friends,setFriends]=useState(null)
   const getFriends=async()=>{
-      axios.get(`${process.env.REACT_APP_URL_BACKEND}relationships/allFollows/`+id).then((e)=>{
+      axios.get(`${process.env.REACT_APP_URL_BACKEND}/relationships/allFollows/`+id).then((e)=>{
         setFriends(e.data.datos)
       })
   }

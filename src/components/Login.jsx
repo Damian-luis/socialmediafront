@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css"
 import axios from "axios"
 export const Login=()=>{
+  console.log(process.env.REACT_APP_URL_BACKEND)
     const dispatch = useDispatch()
     const navigate=useNavigate()
     const [user,setUser]=useState({
@@ -26,6 +27,7 @@ export const Login=()=>{
         e.preventDefault()
         console.log(process.env.REACT_APP_URL_BACKEND)
         await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/login`,user).then(e=>{
+          console.log(e.data)
             dispatch(addSesion({
                 mail:user.mail,
                 password:user.password, 
@@ -37,7 +39,10 @@ export const Login=()=>{
                 password:""
             })
             navigate("/home")
-        }).catch(e=>{setError(e.response.data.message)});
+        }).catch(e=>{
+          console.log(e.response.data.message)
+          setError(e.response.data.message)
+        });
         
     }
     console.log("login rendered")

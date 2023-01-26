@@ -21,7 +21,7 @@ export const Home=()=>{
     const friendsPosts = useSelector(state=>state.data.publicacionesAmigos)
     console.log(friendsPosts)
     const getData = async() =>{
-      const allPosts=await axios.get(`${process.env.REACT_APP_URL_BACKEND}posts/allPosts/`+id).then(e=>{
+      const allPosts=await axios.get(`${process.env.REACT_APP_URL_BACKEND}/posts/allPosts/`+id).then(e=>{
         console.log(e.data)
         dispatch(getPostData({
           misPublicaciones:e.data.misPublicaciones,
