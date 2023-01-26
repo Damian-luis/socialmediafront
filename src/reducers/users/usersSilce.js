@@ -4,6 +4,8 @@ const initialState = {
  mail:"",
  password:"",
  id:"",
+ name:"",
+ lastname:"",
  isLoggedIn:false
 }
 
@@ -29,11 +31,15 @@ export const userSlice = createSlice({
         state.password=action.payload.password
         state.isLoggedIn=action.payload.isLoggedIn
         state.id=action.payload.id
+        state.name=action.payload.name
+        state.lastname=action.payload.lastname
     },
     finishSesion:(state)=>{
         state.mail=""
         state.password=""
         state.isLoggedIin=false
+        state.name=""
+        state.lastname=""
     }
   },
 })

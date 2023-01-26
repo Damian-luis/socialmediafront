@@ -1,23 +1,26 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {useSelector,useDispatch} from "react-redux"
-import { addSesion } from "../reducers/users/usersSilce";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Login.module.css"
 import axios from "axios"
-export const Login=()=>{
-  console.log(process.env.REACT_APP_URL_BACKEND)
-    const dispatch = useDispatch()
+export const Register=()=>{
     const navigate=useNavigate()
     const [user,setUser]=useState({
         mail:"",
-        password:""
+        password:"",
+        name:"",
+        lastname:""
     })
     const [error,setError]=useState(false)
-    
+    const nameHandler=(e)=>{
+        setUser({...user,name:e.target.value})
+        }
+        const lastnameHandler=(e)=>{
+            setUser({...user,lastname:e.target.value})
+            }
     const mailHandler=(e)=>{
     setUser({...user,mail:e.target.value})
     }
@@ -26,21 +29,17 @@ export const Login=()=>{
         }
     const submitHandler=async(e)=>{
         e.preventDefault()
-        await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/login`,user).then(e=>{
+        await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/addUser`,user).then(e=>{
           console.log(e.data)
-            dispatch(addSesion({
-                mail:e.data.user[0].mail,
-                password:e.data.user[0].password,
-                isLoggedIn:true,
-                name:e.data.user[0].name,
-                lastname:e.data.user[0].lastname,
-                id:e.data.user[0].id  
-            }))
+            
            setUser({
                 mail:"",
-                password:""
+                password:"",
+                name:"",
+                lastname:""
             })
-            navigate("/home")
+alert(e.data.message)
+            navigate("/")
         }).catch(e=>{
           console.log(e.response.data.message)
           setError(e.response.data.message)
@@ -48,10 +47,21 @@ export const Login=()=>{
         
     }
     console.log("login rendered")
-    const mail=useSelector(state=>state.user.mail)
     return <div className={styles.container}>
       <div className={styles.formContainer}>
         <Form onSubmit={submitHandler} className={styles.form}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="text" placeholder="Ingresa tu nombre" onChange={nameHandler} />
+        <Form.Text className="text-muted">
+        </Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Apellido</Form.Label>
+        <Form.Control type="text" placeholder="Ingresar tu apellido" onChange={lastnameHandler} />
+        <Form.Text className="text-muted">
+        </Form.Text>
+      </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Correo electrónico</Form.Label>
         <Form.Control type="email" placeholder="Ingresar correo" onChange={mailHandler} />
@@ -65,13 +75,10 @@ export const Login=()=>{
       </Form.Group>
       
       <Button variant="primary" type="submit">
-        Iniciar sesión
+        Registrarse
       </Button>
       {error}
     </Form>
-    <p>Aun no tienes una cuenta? <Link to="/register">Registrate</Link></p>
     </div>
         </div>
 }
-
-/**/

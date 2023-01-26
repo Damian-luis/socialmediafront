@@ -2,23 +2,28 @@ import React from "react";
 import styles from "./CreatePost.module.css";
 import Button from 'react-bootstrap/Button';
 import {useState} from "react"
-import {useDispatch} from "react-redux"
+import {useDispatch,useSelector} from "react-redux"
 import axios from "axios"
 export const CreatePost=()=>{
+    const name =useSelector(state=>state.user.name)
+    const lastname =useSelector(state=>state.user.lastname)
+    const id =useSelector(state=>state.user.id)
     const dispatch=useDispatch()
-    const [post,setPost]=useState("")
+    const [post,setPost]=useState({publicacion:""})
     const postHanlder=(e)=>{
-        setPost(e.target.value)
+        setPost({...post,publicacion:e.target.value})
     }
-    const sendPost=(e)=>{
+    const sendPost=async(e)=>{
         e.preventDefault()
-        dispatch()
+        await axios.post(`${process.env.REACT_APP_URL_BACKEND}/posts/addPost/${name}/${lastname}/${id}`,post)
+        .then(e=>{alert(e.data.message)})
+        setPost({publicacion:""})
     }
     console.log("create post rendered")
     return <>
     <div className={styles.formContainer}>
     <form className={styles.form} onSubmit={sendPost}>
-        <input placeholder="Hay alguna novedad?" onChange={postHanlder}/>
+        <input placeholder="Hay alguna novedad?" onChange={postHanlder} value={post.publicacion}/>
         <Button variant="primary" type="submit">
        Publicar
       </Button>
