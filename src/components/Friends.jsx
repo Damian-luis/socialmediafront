@@ -10,6 +10,7 @@ export const Friends=()=>{
   const [friends,setFriends]=useState(null)
   const getFriends=async()=>{
       axios.get(`${process.env.REACT_APP_URL_BACKEND}/relationships/allFollows/`+id).then((e)=>{
+        console.log(e.data)
         setFriends(e.data.datos)
       })
   }
@@ -22,7 +23,8 @@ export const Friends=()=>{
 
    
    <div className={styles.containerPrincipal}>
-   {friends&& friends.map((friend)=>{return <Friend name={friend.name} lastname={friend.lastname} id={friend.id}/>})}
+    <h4 className={styles.tusamigos}>Todos tus amigos:</h4>
+   {friends&& friends.map((friend)=>{return <Friend name={friend.name} lastname={friend.lastname} id={friend.id} mail={friend.mail}/>})}
    
   
    </div>

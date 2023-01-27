@@ -8,3 +8,7 @@
     flex-direction: column;
     align-items: center;
 }
+.tusamigos{
+  align-self: flex-start;
+  padding:30px
+}

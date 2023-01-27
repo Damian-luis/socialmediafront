@@ -71,15 +71,24 @@ await axios.delete(`${process.env.REACT_APP_URL_BACKEND}/posts/deletePost/${id}/
 }
     return <>
     <div className={styles.card}>
-        <button onClick={handleShow} ><AiOutlineEdit/> Editar publicacion</button>
-        <button onClick={deletePostHandler}><MdDeleteOutline/>Eliminar publicacion</button>
         
+
+        <div className={styles.post}>
         <div className={styles.nombre}>
             <h4>{props.nombre} {props.apellido}</h4>
         </div>
         <div className={styles.publicacion}>
             <p>{props.publicacion}</p>
         </div>
+        </div>
+
+
+        <div className={styles.buttons}>
+        <Button variant="secondary" onClick={handleShow}>Editar <AiOutlineEdit/></Button>
+        <Button variant="danger" onClick={deletePostHandler}>Eliminar <MdDeleteOutline/></Button>
+        </div> 
+
+        
     </div>
 
       <Modal show={show} onHide={handleClose}>
