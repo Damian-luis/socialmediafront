@@ -1,6 +1,6 @@
 import React from "react";
 import {Sidebar} from "./Sidebar"
-import styles from "./Profile.module.css";
+import styles from "./VisitProfile.module.css";
 import { PostCard } from "./PostCard";
 import { useSelector,useDispatch } from "react-redux";
 import axios from "axios";
@@ -34,11 +34,12 @@ export const VisitProfile=()=>{
    
    <div className={styles.containerPrincipal}>
    
-   <div>
-    {dataUser.name.length>0&&dataUser.name} {dataUser.lastname.length>0&&dataUser.lastname}
+   <div className={styles.nombre}>
+    <h1>{dataUser.name.length>0&&dataUser.name} {dataUser.lastname.length>0&&dataUser.lastname}</h1>
    </div>
-  
-  <div>
+   <span className={styles.nombreUsuario}>Publicaciones de {dataUser.name.length>0&&dataUser.name} {dataUser.lastname.length>0&&dataUser.lastname}</span>
+  <div className={styles.posts}>
+   
     {post && post.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido}/>})}
   </div>
    </div>

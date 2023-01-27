@@ -1,0 +1,31 @@
+.app{
+    box-sizing: border-box;
+    display: flex;
+  }
+.containerPrincipal{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.nombre{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 25px;
+    
+}
+.nombre h1{
+    font-weight: 700;
+}
+.posts{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.nombreUsuario{
+    font-weight: 300;
+    font-size: 20px;
+}
