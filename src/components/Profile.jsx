@@ -1,7 +1,7 @@
 import React from "react";
 import {Sidebar} from "./Sidebar"
 import styles from "./Profile.module.css";
-import { PostCard } from "./PostCard";
+import { PostCardEdit } from "./PostCardEdit";
 import { useSelector,useDispatch } from "react-redux";
 export const Profile=()=>{
   const myPosts = useSelector(state=>state.data.misPublicaciones)
@@ -11,7 +11,7 @@ export const Profile=()=>{
 
    
    <div className={styles.containerPrincipal}>
-   {myPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido}/>})}
+   {myPosts.map(e=>{return <PostCardEdit publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} idPublicacion={e.idPublicacion}/>})}
   
    </div>
     </div>

@@ -19,17 +19,35 @@ export const dataSlice = createSlice({
     decrement: (state) => {
       state.value -= 1
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
+    addPostData: (state, action) => {
+      state.misPublicaciones.push(action.payload)
+    },
+    updatePostData: (state, action) => {
+        for(let i=0; i<state.misPublicaciones.length; i++){
+          if(state.misPublicaciones[i].idPublicacion===action.payload.idPublicacion){
+            state.misPublicaciones[i].publicacion=action.payload.publicacion
+            
+          }
+        }
+        
+      
     },
     getPostData:(state,action)=>{
         state.misPublicaciones=action.payload.misPublicaciones
         state.publicacionesAmigos=action.payload.publicacionesAmigos
+    },
+    deletePostData:(state,action)=>{
+      const idPublicacion=action.payload.idPublicacion
+      const data=state.misPublicaciones.filter(e=>{
+        return e.idPublicacion!==action.payload.idPublicacion
+      })
+      state.misPublicaciones=data
     }
   },
+  
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount,getPostData } = dataSlice.actions
+export const { increment, decrement, addPostData ,getPostData,updatePostData,deletePostData} = dataSlice.actions
 
 export default dataSlice.reducer

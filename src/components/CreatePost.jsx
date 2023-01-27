@@ -3,6 +3,7 @@ import styles from "./CreatePost.module.css";
 import Button from 'react-bootstrap/Button';
 import {useState} from "react"
 import {useDispatch,useSelector} from "react-redux"
+import { addPostData } from "../reducers/data/dataSlice";
 import axios from "axios"
 export const CreatePost=()=>{
     const name =useSelector(state=>state.user.name)
@@ -15,6 +16,13 @@ export const CreatePost=()=>{
     }
     const sendPost=async(e)=>{
         e.preventDefault()
+        console.log(post)
+        dispatch(addPostData({
+            nombre:name,
+            apellido:lastname,
+            id,
+            publicacion:post.publicacion
+        }))
         await axios.post(`${process.env.REACT_APP_URL_BACKEND}/posts/addPost/${name}/${lastname}/${id}`,post)
         .then(e=>{alert(e.data.message)})
         setPost({publicacion:""})

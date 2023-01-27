@@ -68,8 +68,12 @@ export const Login=()=>{
         Iniciar sesión
       </Button>
       {error}
-    </Form>
+      <div className={styles.register}>
     <p>Aun no tienes una cuenta? <Link to="/register">Registrate</Link></p>
+    </div>
+    </Form>
+    
+    
     </div>
         </div>
 }
