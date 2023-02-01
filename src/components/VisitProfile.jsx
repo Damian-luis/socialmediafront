@@ -7,10 +7,12 @@ import axios from "axios";
 import { useEffect,useState } from "react";
 export const VisitProfile=()=>{
   const id = useSelector(state=>state.userSelected.id)
+  
   const [dataUser,setDataUser]=useState({
     name:"",
     lastname:"",
-    mail:""
+    mail:"",
+
   })
   const [post,setPost] = useState(false)
   const [publicacion,setPublicaciones]=useState()
@@ -19,14 +21,16 @@ export const VisitProfile=()=>{
           setDataUser({...dataUser,
             name:e.data.dataBasica[0].name,
             lastname:e.data.dataBasica[0].lastname,
-            mail:e.data.dataBasica[0].mail
+            mail:e.data.dataBasica[0].mail,
+
         })
+        
         setPost(e.data.publicacionesUser)
 })
   }
   useEffect(()=>{
     getData()
-  })
+  },[])
     return <>
     <div className={styles.app}>
       <Sidebar/>
@@ -40,7 +44,7 @@ export const VisitProfile=()=>{
    <span className={styles.nombreUsuario}>Publicaciones de {dataUser.name.length>0&&dataUser.name} {dataUser.lastname.length>0&&dataUser.lastname}</span>
   <div className={styles.posts}>
    
-    {post && post.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido}/>})}
+    {post && post.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} date={e.date} time={e.time}/>})}
   </div>
    </div>
     </div>

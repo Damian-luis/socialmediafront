@@ -30,7 +30,7 @@ export const Register=()=>{
     const submitHandler=async(e)=>{
         e.preventDefault()
         await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/addUser`,user).then(e=>{
-          console.log(e.data)
+          
             
            setUser({
                 mail:"",
@@ -41,7 +41,7 @@ export const Register=()=>{
 alert(e.data.message)
             navigate("/")
         }).catch(e=>{
-          console.log(e.response.data.message)
+          
           setError(e.response.data.message)
         });
         

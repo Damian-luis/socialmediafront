@@ -19,10 +19,10 @@ export const Home=()=>{
     const id =useSelector(state=>state.user.id)
     const mail=useSelector(state=>state.user.mail)
     const friendsPosts = useSelector(state=>state.data.publicacionesAmigos)
-    console.log(friendsPosts)
+   
     const getData = async() =>{
       const allPosts=await axios.get(`${process.env.REACT_APP_URL_BACKEND}/posts/allPosts/`+id).then(e=>{
-        console.log(e.data)
+        
         dispatch(getPostData({
           misPublicaciones:e.data.misPublicaciones,
           publicacionesAmigos:e.data.publicacionesAmigos
@@ -31,7 +31,7 @@ export const Home=()=>{
       
     }
     useEffect(() =>{
-      console.log("home effect rendered")
+      
       getData()
       
     },[])
@@ -43,7 +43,7 @@ export const Home=()=>{
    <div className={styles.containerPrincipal}>
    <CreatePost/>
    
-   {friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser}/>})}
+   {friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time}/>})}
    </div>
     </div>
   </>

@@ -6,8 +6,12 @@
     border-radius: 20px;
     margin: 20px;
 }
-.nombre:hover{
+.nombre h4:hover{
     color:blue
+}
+.nombre{
+    display: flex;
+    justify-content: space-between;
 }
 @media only screen and (min-width: 768px) {
     .card{

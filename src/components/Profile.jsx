@@ -11,7 +11,7 @@ export const Profile=()=>{
 
    
    <div className={styles.containerPrincipal}>
-   {myPosts.map(e=>{return <PostCardEdit publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} idPublicacion={e.idPublicacion}/>})}
+   {myPosts.map(e=>{return <PostCardEdit publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} idPublicacion={e.idPublicacion} date={e.date} time={e.time}/>})}
   
    </div>
     </div>

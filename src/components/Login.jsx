@@ -5,11 +5,12 @@ import {useSelector,useDispatch} from "react-redux"
 import { addSesion } from "../reducers/users/usersSilce";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import {AiFillEye} from "react-icons/ai";
 import styles from "./Login.module.css"
 import axios from "axios"
+import InputGroup from 'react-bootstrap/InputGroup';
 export const Login=()=>{
-  console.log(process.env.REACT_APP_URL_BACKEND)
+  
     const dispatch = useDispatch()
     const navigate=useNavigate()
     const [user,setUser]=useState({
@@ -27,14 +28,16 @@ export const Login=()=>{
     const submitHandler=async(e)=>{
         e.preventDefault()
         await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/login`,user).then(e=>{
-          console.log(e.data)
+          
             dispatch(addSesion({
                 mail:e.data.user[0].mail,
                 password:e.data.user[0].password,
                 isLoggedIn:true,
                 name:e.data.user[0].name,
                 lastname:e.data.user[0].lastname,
-                id:e.data.user[0].id  
+                id:e.data.user[0].id,
+                date:e.data.user[0].mail,
+                time:e.data.user[0].time  
             }))
            setUser({
                 mail:"",
@@ -42,12 +45,16 @@ export const Login=()=>{
             })
             navigate("/home")
         }).catch(e=>{
-          console.log(e.response.data.message)
+          
           setError(e.response.data.message)
         });
         
     }
-    console.log("login rendered")
+    const [checkPassword,setCheckPassword]=useState(false)
+    const seePassword=()=>{
+setCheckPassword(!checkPassword)
+    }
+    
     const mail=useSelector(state=>state.user.mail)
     return <div className={styles.container}>
       <div className={styles.formContainer}>
@@ -60,8 +67,10 @@ export const Login=()=>{
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
+
         <Form.Label>Contraseña</Form.Label>
-        <Form.Control type="password" placeholder="Ingresar contraseña" onChange={passwordHandler}/>
+        <InputGroup size="sm" className="mb-3">
+        <Form.Control type={checkPassword===true?"password":"text"} placeholder="Ingresar contraseña" onChange={passwordHandler}/><AiFillEye onClick={seePassword}/></InputGroup>
       </Form.Group>
       
       <Button variant="primary" type="submit">

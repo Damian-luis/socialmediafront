@@ -3,6 +3,7 @@ import {CgLogOff} from "react-icons/cg"
 import {CgProfile} from "react-icons/cg"
 import {FaUserFriends} from "react-icons/fa"
 import {AiOutlineHome} from "react-icons/ai"
+import {AiOutlineSearch} from "react-icons/ai"
 import styles from "./Sidebar.module.css"
 import {useSelector,useDispatch} from "react-redux"
 import { finishSesion } from "../reducers/users/usersSilce";
@@ -15,7 +16,6 @@ export const Sidebar=()=>{
         dispatch(finishSesion())
         navigate("/")
     }
-    console.log("sidebar rendered")
     const profileHandler=()=>{
         navigate("/profile")
     }
@@ -25,6 +25,9 @@ export const Sidebar=()=>{
     const homeHandler=()=>{
         navigate("/home")
     }
+    const searchHandler=()=>{
+        navigate("/search")
+    }
     return <>
     <div className={styles.sidebar}>
         <div className={styles.menu}>
@@ -32,7 +35,7 @@ export const Sidebar=()=>{
                 <li onClick={homeHandler}>Inicio <AiOutlineHome className={styles.menuLogo}/></li>
                 <li onClick={profileHandler}>Perfil <CgProfile className={styles.menuLogo}/></li>
                 <li onClick={friendsHandler}>Amigos <FaUserFriends className={styles.menuLogo}/></li>
-                
+                <li onClick={searchHandler}>Buscar <AiOutlineSearch className={styles.menuLogo}/></li>
             </ul>
         </div>
         <div className={styles.exitDiv} onClick={logOutHandler}>

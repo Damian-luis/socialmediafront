@@ -27,7 +27,7 @@ export const CreatePost=()=>{
         .then(e=>{alert(e.data.message)})
         setPost({publicacion:""})
     }
-    console.log("create post rendered")
+    
     return <>
     <div className={styles.formContainer}>
     <form className={styles.form} onSubmit={sendPost}>

@@ -60,7 +60,7 @@ export const PostCardEdit=(props)=>{
         
     }
 const deletePostHandler=async(e) => {
-  console.log("se largo boton eliminar")
+ 
   dispatch(deletePostData({
     idPublicacion:props.idPublicacion,
     id
@@ -76,6 +76,7 @@ await axios.delete(`${process.env.REACT_APP_URL_BACKEND}/posts/deletePost/${id}/
         <div className={styles.post}>
         <div className={styles.nombre}>
             <h4>{props.nombre} {props.apellido}</h4>
+            <span>{props.date} {props.time}</span>
         </div>
         <div className={styles.publicacion}>
             <p>{props.publicacion}</p>
