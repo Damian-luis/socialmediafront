@@ -31,7 +31,7 @@ export const PostCard=(props)=>{
         setComment("")
     }
     const reactHandler=async(e)=>{
-        e.preventDefault()
+        e.preventDefault() 
         
         await axios.put(`${process.env.REACT_APP_URL_BACKEND}/interactions/reactPost/${props.idPublicacion}/${myId}/${name}/${lastname}`).then(e=>{console.log(e.data.response)})
         setComment("")
