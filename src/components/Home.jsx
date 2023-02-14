@@ -43,7 +43,7 @@ export const Home=()=>{
    <div className={styles.containerPrincipal}>
    <CreatePost/>
    
-   {friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time}/>})}
+   {friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})}
    </div>
     </div>
   </>

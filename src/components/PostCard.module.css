@@ -6,6 +6,14 @@
     border-radius: 20px;
     margin: 20px;
 }
+.heartLiked{
+   
+    color:red
+}
+.heartUnliked{
+   
+    color:gray
+}
 .nombre h4:hover{
     color:blue
 }
