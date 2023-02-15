@@ -37,7 +37,7 @@ export const Home=()=>{
     },[])
     return <>
     <div className={styles.app}>
-      <Sidebar/>
+      {/*<Sidebar/>*/}
 
    
    <div className={styles.containerPrincipal}>

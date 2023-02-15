@@ -9,13 +9,23 @@ import { Search } from './components/Search.jsx';
 import { store } from './app/store'
 import { Provider } from 'react-redux'
 import { useSelector } from 'react-redux';
+import { Sidebar } from './components/Sidebar.jsx';
+import { Layout } from './layout/layout.js';
+import styles from "./App.module.css";
+
 function App() {
   const isLogged=useSelector(state=>state.user.isLoggedIn)
   return (
     <div className="App">
+     
       <Provider store={store}>
+        {isLogged? 
+        <>
+        <Sidebar/>
+        <div className={styles.main}>
         <Routes>
-        <Route path="/" element={<Login/>} />
+        {/*<Route path="/" element={<Login/>} />*/}
+        <Route path="/" element={<Layout/>} />
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/friends" element={<Friends/>}/>
         <Route path="/register" element={<Register/>}/>
@@ -26,7 +36,18 @@ function App() {
         :null}
         <Route path={"*"} element={ <Login/> }/>
         </Routes>
+        </div>
+        </>
+        :
+        <div>
+        <Routes>
+        <Route path="/" element={<Login/>} />
+        </Routes>
+        </div>
+        }
+        
         </Provider>
+        
     </div>
   );
 }

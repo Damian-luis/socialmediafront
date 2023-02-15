@@ -23,7 +23,7 @@ export const Search=()=>{
   },[])
     return <>
     <div className={styles.app}>
-      <Sidebar/>
+      {/*<Sidebar/>*/}
 
    
    <div className={styles.containerPrincipal}>

@@ -58,20 +58,19 @@ setCheckPassword(!checkPassword)
     const mail=useSelector(state=>state.user.mail)
     return <div className={styles.container}>
       <div className={styles.formContainer}>
-        <Form onSubmit={submitHandler} className={styles.form}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Correo electrónico</Form.Label>
-        <Form.Control type="email" placeholder="Ingresar correo" onChange={mailHandler} />
-        <Form.Text className="text-muted">
-        </Form.Text>
-      </Form.Group>
+        <form onSubmit={submitHandler} className={styles.form}>
+      
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="Ingresar correo" onChange={mailHandler} />
+        
+      
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      
 
-        <Form.Label>Contraseña</Form.Label>
-        <InputGroup size="sm" className="mb-3">
-        <Form.Control type={checkPassword===true?"password":"text"} placeholder="Ingresar contraseña" onChange={passwordHandler}/><AiFillEye onClick={seePassword}/></InputGroup>
-      </Form.Group>
+        <label>Contraseña</label>
+        <div><input type={checkPassword===true?"password":"text"} placeholder="Ingresar contraseña" onChange={passwordHandler}></input><span><AiFillEye onClick={seePassword} className={styles.seePassword}/></span></div>
+        
+      
       
       <Button variant="primary" type="submit">
         Iniciar sesión
@@ -80,7 +79,7 @@ setCheckPassword(!checkPassword)
       <div className={styles.register}>
     <p>Aun no tienes una cuenta? <Link to="/register">Registrate</Link></p>
     </div>
-    </Form>
+    </form>
     
     
     </div>

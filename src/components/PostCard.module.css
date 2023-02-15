@@ -1,25 +1,78 @@
 .card{
-    background-color:rgb(170, 169, 169);
-    width: 60%;
+    background-color:white;
+    width: 40%;
     height: auto;
     padding:20px;
     border-radius: 20px;
-    margin: 20px;
+    
+}
+.picture{
+    width: 45px;
+    height: 45px;
+}
+.nombreLeft{
+    
+}
+.nombreRight{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+.nombreRight h4{
+    font-weight: 700;
+    color:rgb(71, 71, 71)
+}
+.nombreRight span{
+    font-size:15px
+}
+.publicacion{
+    padding:20px;
+}
+.publicacion p{
+    font-size:25px;
+    
 }
 .heartLiked{
    
-    color:red
+    color:red;
+    
 }
 .heartUnliked{
    
     color:gray
 }
 .nombre h4:hover{
-    color:blue
+    text-decoration: underline;
 }
 .nombre{
     display: flex;
-    justify-content: space-between;
+    gap:25px
+}
+.commentsRight h4{
+    font-weight: 700;
+    color:rgb(71, 71, 71)
+}
+.commentsRight span{
+    font-size:15px
+}
+.commentCard{
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-top: 30px;
+}
+.comment{
+    padding:15px
+}
+.comment p{
+    font-size:15px
+}
+input{
+    border: none;
+}
+form{
+    display: flex;
+    justify-content:space-around
 }
 @media only screen and (min-width: 768px) {
     .card{

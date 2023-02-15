@@ -23,7 +23,15 @@
 .register{
     margin-top:20px
 }
-
+input:focus{
+    border:0;
+    outline: none;
+    box-shadow: none
+}
+.seePassword{
+    width:20px;
+    height: 20px;
+}
 @media only screen and (max-width: 600px) {
     .formContainer{
         width: 100%;
