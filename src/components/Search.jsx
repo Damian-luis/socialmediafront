@@ -7,7 +7,7 @@ import { Friend } from "./Friend";
 import axios from "axios"
 import { PostCardEdit } from "./PostCardEdit";
 export const Search=()=>{
-  const id = useSelector(state=>state.user.id)
+  const id =localStorage.getItem('id')
 
   const [friends,setFriends]=useState(null)
   const [noFriends,setNoFriends]=useState(null)

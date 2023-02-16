@@ -49,6 +49,7 @@ export const PostCard=(props)=>{
             <span>{props.date} {props.time}</span>
             </div>
         </div>
+        
         <div className={styles.publicacion}>
             <p>{props.publicacion}</p>
         </div>
@@ -81,7 +82,7 @@ export const PostCard=(props)=>{
                 </Button>
             </form>
         </div>
-
+            
         </div>
 
         

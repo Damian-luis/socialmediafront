@@ -6,7 +6,7 @@ import { useEffect,useState } from "react";
 import { Friend } from "./Friend";
 import axios from "axios"
 export const Friends=()=>{
-  const id = useSelector(state=>state.user.id)
+  const id =localStorage.getItem('id')
   const [friends,setFriends]=useState(null)
   const [noFriends,setNoFriends]=useState(null)
   const getFriends=async()=>{

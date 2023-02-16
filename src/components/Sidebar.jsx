@@ -11,10 +11,12 @@ import {useNavigate} from "react-router-dom"
 export const Sidebar=()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const logOutHandler=(e)=>{
+    const logOutHandler=async(e)=>{
         e.preventDefault()
-        dispatch(finishSesion())
-        navigate("/")
+        localStorage.removeItem('logged')
+         localStorage.removeItem('id')
+         dispatch(finishSesion())
+         navigate("/")
     }
     const profileHandler=()=>{
         navigate("/profile")

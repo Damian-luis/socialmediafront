@@ -3,18 +3,20 @@ import { Sidebar } from '../components/Sidebar';
 import { useState } from 'react';
 import { Login } from '../components/Login';
 import { Home } from '../components/Home';
-
+import styles from "./layout.module.css"
 export const Layout=({children})=>{
 
-    const [authenticated, setAuthenticated] = useState(true);
-    return <>
+    //const isLogged=localStorage.getItem('logged')
     
-        <div className="main">
-            
-           {authenticated?<Login/>:<Home/>}
-        <div className="content">
+    return <>
+     
+        <div className={styles.main}>
+    <Sidebar/>
            
-        </div>
+        <main>
+           {children}
+           
+           </main>
         </div>
         
     

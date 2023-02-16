@@ -11,12 +11,16 @@ import axios from "axios";
 import { useEffect } from "react";
 import { getPostData } from "../reducers/data/dataSlice";
 import { PostCard } from "./PostCard";
+import { Layout } from "../layout/layout";
 export const Home=()=>{
+  const isLogged=localStorage.getItem('logged')
+  console.log(isLogged)
     const [show, setShow] = useState(false);
     const dispatch = useDispatch()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const id =useSelector(state=>state.user.id)
+    const id =localStorage.getItem('id')
+    
     const mail=useSelector(state=>state.user.mail)
     const friendsPosts = useSelector(state=>state.data.publicacionesAmigos)
    
@@ -35,16 +39,20 @@ export const Home=()=>{
       getData()
       
     },[])
-    return <>
-    <div className={styles.app}>
-      {/*<Sidebar/>*/}
-
-   
-   <div className={styles.containerPrincipal}>
+    return (
+        
+        <div className={styles.containerPrincipal}>
    <CreatePost/>
    
    {friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})}
-   </div>
-    </div>
-  </>
+  </div>
+
+
+       
+   
+    )
+    
+  
 }
+{/*}>
+   */}

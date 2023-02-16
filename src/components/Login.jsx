@@ -28,7 +28,7 @@ export const Login=()=>{
     const submitHandler=async(e)=>{
         e.preventDefault()
         await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/login`,user).then(e=>{
-          
+            
             dispatch(addSesion({
                 mail:e.data.user[0].mail,
                 password:e.data.user[0].password,
@@ -36,13 +36,15 @@ export const Login=()=>{
                 name:e.data.user[0].name,
                 lastname:e.data.user[0].lastname,
                 id:e.data.user[0].id,
-                date:e.data.user[0].mail,
+                date:e.data.user[0].date,
                 time:e.data.user[0].time  
             }))
            setUser({
                 mail:"",
                 password:""
             })
+            localStorage.setItem('logged',true)
+            localStorage.setItem('id',e.data.user[0].id,)
             navigate("/home")
         }).catch(e=>{
           
@@ -50,7 +52,7 @@ export const Login=()=>{
         });
         
     }
-    const [checkPassword,setCheckPassword]=useState(false)
+    const [checkPassword,setCheckPassword]=useState(true)
     const seePassword=()=>{
 setCheckPassword(!checkPassword)
     }

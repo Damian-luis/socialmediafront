@@ -46,6 +46,7 @@ export const userSlice = createSlice({
         state.lastname=""
         state.date=""
         state.time=""
+        state.id=""
     }
   },
 })
