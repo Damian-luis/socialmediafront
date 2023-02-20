@@ -15,6 +15,7 @@ export const Sidebar=()=>{
         e.preventDefault()
         localStorage.removeItem('logged')
          localStorage.removeItem('id')
+         localStorage.removeItem('mail')
          dispatch(finishSesion())
          navigate("/")
     }

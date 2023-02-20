@@ -6,9 +6,10 @@ import { useEffect,useState } from "react";
 import { Friend } from "./Friend";
 import axios from "axios"
 import { PostCardEdit } from "./PostCardEdit";
+
 export const Search=()=>{
   const id =localStorage.getItem('id')
-
+ 
   const [friends,setFriends]=useState(null)
   const [noFriends,setNoFriends]=useState(null)
   const getFriends=async()=>{
@@ -20,10 +21,11 @@ export const Search=()=>{
   }
   useEffect(()=>{
     getFriends()
+    
   },[])
     return <>
     <div className={styles.app}>
-      {/*<Sidebar/>*/}
+      
 
    
    <div className={styles.containerPrincipal}>

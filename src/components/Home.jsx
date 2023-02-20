@@ -12,31 +12,59 @@ import { useEffect } from "react";
 import { getPostData } from "../reducers/data/dataSlice";
 import { PostCard } from "./PostCard";
 import { Layout } from "../layout/layout";
+import { addSesion } from "../reducers/users/usersSilce";
+
+import useGetUserData from "../helpers/useGetUserData";
 export const Home=()=>{
   const isLogged=localStorage.getItem('logged')
-  console.log(isLogged)
+  
     const [show, setShow] = useState(false);
     const dispatch = useDispatch()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const id =localStorage.getItem('id')
     
-    const mail=useSelector(state=>state.user.mail)
+    const mail=localStorage.getItem('mail')
     const friendsPosts = useSelector(state=>state.data.publicacionesAmigos)
    
     const getData = async() =>{
-      const allPosts=await axios.get(`${process.env.REACT_APP_URL_BACKEND}/posts/allPosts/`+id).then(e=>{
-        
-        dispatch(getPostData({
-          misPublicaciones:e.data.misPublicaciones,
-          publicacionesAmigos:e.data.publicacionesAmigos
-      }))
-      })
+      try{
+        const userData=await axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/getUserData/`+id).then(e=>{
+          
+          dispatch(addSesion({
+            mail:e.data.user[0].mail,
+            password:e.data.user[0].password,
+            isLoggedIn:true,
+            name:e.data.user[0].name,
+            lastname:e.data.user[0].lastname,
+            id:e.data.user[0].id,
+            date:e.data.user[0].date,
+            time:e.data.user[0].time  
+        }))
+        })
+
+        /*
+        const allPosts=await axios.get(`${process.env.REACT_APP_URL_BACKEND}/posts/allPosts/`+id).then(e=>{
+          
+          dispatch(getPostData({
+            misPublicaciones:e.data.misPublicaciones,
+            publicacionesAmigos:e.data.publicacionesAmigos
+        }))
+        })*/
+
+      }
+        catch(e){
+          console.log(e)
+        }
+      
+      
       
     }
+    useGetUserData(id)
+    
     useEffect(() =>{
       
-      getData()
+      
       
     },[])
     return (
@@ -54,5 +82,3 @@ export const Home=()=>{
     
   
 }
-{/*}>
-   */}

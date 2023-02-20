@@ -6,13 +6,13 @@ import { PreviewProfileFriend } from "./PreviewProfileFriend";
 import styles from "./Friend.module.css";
 import Button from 'react-bootstrap/Button';
 export const Friend=(props)=>{
-   console.log(props)
+  
     const dispatch = useDispatch()
     const navigate=useNavigate()
 
     const profileHandler=async(e)=>{
         //e.preventDefault()
-        console.log(e.target.value)
+        
         await dispatch(selectUser({id:e.target.value}))
         navigate("/visit-profile")
 

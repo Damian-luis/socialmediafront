@@ -19,6 +19,7 @@
     width:45px;
     height: 45px;
 }
+
 @media only screen and (max-width: 600px) {
     .formContainer{
         width: 90%;

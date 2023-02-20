@@ -10,11 +10,13 @@ import {FaMapMarkerAlt} from "react-icons/fa"
 import {FaUserGraduate} from "react-icons/fa"
 import {AiFillMail} from "react-icons/ai"
 import {AiFillEdit} from "react-icons/ai"
-
+import useGetUserData from "../helpers/useGetUserData";
 export const Profile=()=>{
+  const id =localStorage.getItem('id')
+  useGetUserData(id)
   const myPosts = useSelector(state=>state.data.misPublicaciones)
   const myInfo = useSelector(state=>state.user)
-  console.log(myInfo)
+  console.log(myPosts)
     return <div className={styles.containerPrincipal}>
 
     <div className={styles.portada}>
