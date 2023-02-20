@@ -28,7 +28,8 @@ export const Login=()=>{
     const submitHandler=async(e)=>{
         e.preventDefault()
         await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/login`,user).then(e=>{
-         
+          localStorage.setItem('name',e.data.user[0].name)
+          localStorage.setItem('lastname',e.data.user[0].lastname)
          localStorage.setItem('mail',e.data.user[0].mail)
          localStorage.setItem('logged',true)
          localStorage.setItem('id',e.data.user[0].id,)

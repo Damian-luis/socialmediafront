@@ -54,11 +54,11 @@ export const PostCard=(props)=>{
             <p>{props.publicacion}</p>
         </div>
        <div>
-        <AiFillHeart className={liked?styles.heartLiked:styles.heartUniked} onClick={reactHandler}/> {/*props.usersLinked.length*/}  reacciones
+        <AiFillHeart className={liked?styles.heartLiked:styles.heartUniked} onClick={reactHandler}/> {props.usersLinked.length}  reacciones
         </div>
         
             
-             {/*
+             
         {props.usersComments.length > 0 && props.usersComments.map(e=>{return <div className={styles.commentCard}>
             <div className={styles.nombre}>
                 <div className={styles.commentsLeft}>
@@ -72,7 +72,7 @@ export const PostCard=(props)=>{
             <div className={styles.comment}>
             <p>{e.comment}</p>
             </div>
-        </div>})}*/}
+        </div>})}
 
                 <div>
             <form onSubmit={sendComment}>

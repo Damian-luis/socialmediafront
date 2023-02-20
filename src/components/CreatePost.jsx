@@ -5,14 +5,14 @@ import {useState} from "react"
 import {useDispatch,useSelector} from "react-redux"
 import { addPostData } from "../reducers/data/dataSlice";
 import { ToastContainer, toast } from 'react-toastify';
-import { useGetUserData}  from "../helpers/useGetUserData.jsx";
+import useGetUserData from "../helpers/useGetUserData";
   import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios"
 export const CreatePost=()=>{
     const notify = () => toast("Wow so easy!");
-    const name =useSelector(state=>state.user.name)
-    const lastname =useSelector(state=>state.user.lastname)
-    const id =useSelector(state=>state.user.id)
+    const name =localStorage.getItem("name");
+    const lastname =localStorage.getItem("lastname");
+    const id =localStorage.getItem("id");
     const dispatch=useDispatch()
     const [post,setPost]=useState({publicacion:""})
     const postHanlder=(e)=>{
@@ -31,9 +31,10 @@ export const CreatePost=()=>{
             id,
             publicacion:post.publicacion
         }))*/
-
+        
         await axios.post(`${process.env.REACT_APP_URL_BACKEND}/posts/addPost/${name}/${lastname}/${id}`,post)
         .then(e=>{
+            
             if(e.data.status===true){
                 toast.info(`${e.data.message}`, {
                     position: "bottom-right",
@@ -46,6 +47,7 @@ export const CreatePost=()=>{
                     theme: "light",
                     
                     });
+                    
             }
             else{
                 toast.error(`${e.data.message}`, {
