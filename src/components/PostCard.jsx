@@ -8,11 +8,47 @@ import styles from "./PostCard.module.css";
 import {AiFillHeart} from "react-icons/ai"
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
+import Modal from 'react-bootstrap/Modal';
 export const PostCard=(props)=>{
+    const idPublicacion=props.idPublicacion
+    const myId = localStorage.getItem("id")
+    const [show, setShow] = useState(false);
+
+  const handleCloseSend = async(e) => {
+    e.preventDefault()
+    await axios.put(`${process.env.REACT_APP_URL_BACKEND}/posts/updatePost/${myId}/${idPublicacion}`,post)
+        .then(e=>{alert(e.data.message)})
+        setPost({
+          publicacion:props.publicacion,
+          nombre:name,
+          apellido:lastname,
+          id:myId,
+          idPublicacion:""
+        })
+    setShow(false)
+};
+const handleClose=()=>{
+  setShow(false)
+}
+  const handleShow = () => setShow(true);
     
-    const myId = useSelector(state=>state.user.id)
     const name = useSelector(state=>state.user.name)
     const lastname = useSelector(state=>state.user.lastname)
+    const [post,setPost]=useState({
+        publicacion:props.publicacion,
+        nombre:"",
+        apellido:"",
+        id:"",
+        idPublicacion:""
+      })
+      const postHanlder=(e)=>{
+        setPost({
+          nombre:name,
+          apellido:lastname,
+          id:myId,
+          idPublicacion:props.idPublicacion,
+          publicacion:e.target.value})
+      }
     const [comment,setComment]=useState("")
  const liked=props.like
     const navigate=useNavigate()
@@ -40,7 +76,7 @@ export const PostCard=(props)=>{
     }
     return <>
     <div className={styles.card}>
-        <div className={styles.nombre} onClick={profileHandler}>
+        <div className={styles.nombre} /*onClick={profileHandler}*/>
             <div className={styles.nombreLeft}>
             <img src="https://www.seekpng.com/png/full/115-1150053_avatar-png-transparent-png-royalty-free-default-user.png" className={styles.picture}></img>
             </div>
@@ -48,6 +84,27 @@ export const PostCard=(props)=>{
             <h4>{props.nombre} {props.apellido}</h4>
             <span>{props.date} {props.time}</span>
             </div>
+            {props.idUser===myId&&<div><Button variant="secondary" onClick={handleShow}>Editar</Button><Button variant="danger">Eliminar</Button></div>}
+        
+            <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Editar publicacion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <form>
+                <input type="text" value={post.publicacion} onChange={postHanlder}/>
+            </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancelar
+          </Button>
+          <Button variant="primary" onClick={handleCloseSend}>
+            Guardar cambios
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
         </div>
         
         <div className={styles.publicacion}>
@@ -67,6 +124,7 @@ export const PostCard=(props)=>{
                 <div className={styles.commentsRight}>
                 <h4>{e.name} {e.lastname}</h4> <span>{e.data} {e.time}</span>
                 </div>
+                
             </div>
         
             <div className={styles.comment}>

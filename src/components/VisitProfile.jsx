@@ -30,7 +30,7 @@ export const VisitProfile=()=>{
             id:e.data.user[0].id,
  })
         console.log(e.data)
-       setPost(e.data.misPublicaciones)
+        setPost(e.data.post)
 })
   }
   useEffect(()=>{

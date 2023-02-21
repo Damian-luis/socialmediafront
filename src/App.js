@@ -33,7 +33,7 @@ function App() {
         <Route path="/" element={loggedIn?<Layout><Home/></Layout>:<Login onLogin={()=>setLoggedIn(true)}/>} />
         <Route path="/profile" element={<Layout><Profile/></Layout>}/>
         <Route path="/friends" element={<Layout><Friends/></Layout>}/>
-        <Route path="/register" element={<Layout><Register/></Layout>}/>
+        <Route path="/register" element={<Register/>}/>
         <Route path="/search" element={<Layout><Search/></Layout>}/>
         <Route path="/visit-profile" element={<Layout><VisitProfile/></Layout>}/>
         {/*isLogged===true?

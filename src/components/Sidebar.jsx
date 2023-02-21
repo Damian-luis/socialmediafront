@@ -7,6 +7,7 @@ import {AiOutlineSearch} from "react-icons/ai"
 import styles from "./Sidebar.module.css"
 import {useSelector,useDispatch} from "react-redux"
 import { finishSesion } from "../reducers/users/usersSilce";
+import { finishSession } from "../reducers/data/dataSlice";
 import {useNavigate} from "react-router-dom"
 export const Sidebar=()=>{
     const dispatch = useDispatch()
@@ -16,7 +17,10 @@ export const Sidebar=()=>{
         localStorage.removeItem('logged')
          localStorage.removeItem('id')
          localStorage.removeItem('mail')
+         localStorage.removeItem('name')
+         localStorage.removeItem('lastname')
          dispatch(finishSesion())
+         dispatch(finishSession())
          navigate("/")
     }
     const profileHandler=()=>{

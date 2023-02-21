@@ -26,7 +26,7 @@ export const Home=()=>{
     
     const mail=localStorage.getItem('mail')
     const friendsPosts = useSelector(state=>state.data.publicacionesAmigos)
-   
+  
     const getData = async() =>{
       try{
         const userData=await axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/getUserData/`+id).then(e=>{
@@ -39,7 +39,11 @@ export const Home=()=>{
             lastname:e.data.user[0].lastname,
             id:e.data.user[0].id,
             date:e.data.user[0].date,
-            time:e.data.user[0].time  
+            time:e.data.user[0].time,
+            country:e.data.user[0].country,
+            liveCountry:e.data.user[0].liveCountry,
+            birthday:e.data.user[0].birthday,
+            ocupation:e.data.user[0].ocupation  
         }))
         })
 
@@ -64,7 +68,7 @@ export const Home=()=>{
     
     useEffect(() =>{
       
-      
+      getData()
       
     },[])
     return (
@@ -72,7 +76,10 @@ export const Home=()=>{
         <div className={styles.containerPrincipal}>
    <CreatePost/>
    
-   {friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})}
+   {friendsPosts.length>0?friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})
+   :
+   <h4>Parece que aun no sigues a nadie. Conoce gente y vive sus historias ;)</h4>
+   }
   </div>
 
 

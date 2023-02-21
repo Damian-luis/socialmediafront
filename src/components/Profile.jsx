@@ -10,13 +10,14 @@ import {FaMapMarkerAlt} from "react-icons/fa"
 import {FaUserGraduate} from "react-icons/fa"
 import {AiFillMail} from "react-icons/ai"
 import {AiFillEdit} from "react-icons/ai"
+import {RiCake2Fill} from "react-icons/ri"
 import useGetUserData from "../helpers/useGetUserData";
 export const Profile=()=>{
   const id =localStorage.getItem('id')
   useGetUserData(id)
   const myPosts = useSelector(state=>state.data.misPublicaciones)
   const myInfo = useSelector(state=>state.user)
-  console.log(myPosts)
+  
     return <div className={styles.containerPrincipal}>
 
     <div className={styles.portada}>
@@ -32,16 +33,19 @@ export const Profile=()=>{
               <MdOutlineWatchLater className={styles.logo}/> Miembro desde {myInfo.date}
             </li>
             <li>
-              <BsFillHouseDoorFill className={styles.logo}/> Vive en
+              <BsFillHouseDoorFill className={styles.logo}/> Vive en {myInfo.country}
             </li>
             <li>
-              <FaMapMarkerAlt className={styles.logo}/> De
+              <FaMapMarkerAlt className={styles.logo}/> De {myInfo.liveCountry}
               </li>
               <li>
-                <FaUserGraduate className={styles.logo}/> Profesion
+                <FaUserGraduate className={styles.logo}/> Ocupación {myInfo.ocupation}
               </li>
             <li>
               <AiFillMail className={styles.logo}/>Correo {myInfo.mail}
+            </li>
+            <li>
+              <RiCake2Fill className={styles.logo}/>Fecha de nacimiento {myInfo.birthday}
             </li>
           </ul>
         </div>
@@ -50,7 +54,7 @@ export const Profile=()=>{
 
 
     <div className={styles.publicaciones}>
-   {myPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} idPublicacion={e.idPublicacion} date={e.date} time={e.time} usersComments={e.usersComments} usersLinked={e.usersLinked}/>})}
+   {myPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} idPublicacion={e.idPublicacion} date={e.date} time={e.time} usersComments={e.usersComments} usersLinked={e.usersLinked} idUser={e.idUser}/>})}
    </div>
 
    </div>

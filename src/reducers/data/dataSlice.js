@@ -36,6 +36,10 @@ export const dataSlice = createSlice({
         state.misPublicaciones=action.payload.misPublicaciones
         state.publicacionesAmigos=action.payload.publicacionesAmigos
     },
+    finishSession:(state,action)=>{
+      state.misPublicaciones=[]
+      state.publicacionesAmigos=[]
+    },
     deletePostData:(state,action)=>{
       const idPublicacion=action.payload.idPublicacion
       const data=state.misPublicaciones.filter(e=>{
@@ -48,6 +52,6 @@ export const dataSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, addPostData ,getPostData,updatePostData,deletePostData} = dataSlice.actions
+export const { increment, decrement, addPostData ,getPostData,updatePostData,deletePostData,finishSession} = dataSlice.actions
 
 export default dataSlice.reducer
