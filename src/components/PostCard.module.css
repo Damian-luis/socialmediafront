@@ -74,8 +74,22 @@ form{
     display: flex;
     justify-content:space-around
 }
+@media only screen and (max-width: 600px) {
+    .card{
+        width: 100%;
+    }
+    .buttonPost{
+        display:none
+    }
+    .buttonSection{
+        display:flex;
+        height: 40px;
+        gap: 10px;
+    }
+}
 @media only screen and (min-width: 768px) {
     .card{
         width: 80%;
     }
+    
 }

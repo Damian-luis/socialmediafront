@@ -36,7 +36,10 @@ font-size:20px
     list-style: none;
     padding: 10px;
     border-radius: 15px;
+    display: flex;
+    gap: 15px;
 }
+
 .menu ul li:hover{
     background-color:rgb(41, 86, 211);
 }
@@ -46,6 +49,7 @@ display: flex;
 flex-direction: column;
 gap: 20px;
 }
+
 .menuLogo{
     width: 20px;
     height: 20px;
@@ -55,4 +59,11 @@ gap: 20px;
         display: flex;
         flex-direction: column;
     }
+    .menuOption{
+        display:none
+    }
+    .sidebar{
+        width: 20%;
+    }
+    
 }

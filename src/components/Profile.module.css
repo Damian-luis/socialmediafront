@@ -44,3 +44,21 @@
   width:20px;
   height: 20px;
 }
+@media only screen and (max-width: 600px) {
+  .containerPrincipal{
+    padding-left: 0px;
+  }
+  .portada{
+    padding: 10px;
+  }
+  .detalles ul{
+    padding-left: 10px;
+  }
+  .picture{
+    width: 60px;
+    height: 60px;
+  }
+  .portadaUp{
+    padding-top: 15px;
+  }
+}

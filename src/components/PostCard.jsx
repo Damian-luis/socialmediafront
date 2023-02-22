@@ -6,6 +6,8 @@ import { useState } from "react";
 import { selectUser } from "../reducers/userSelected/userSelectedSlice";
 import styles from "./PostCard.module.css";
 import {AiFillHeart} from "react-icons/ai"
+import {AiFillEdit} from "react-icons/ai"
+import {AiFillDelete} from "react-icons/ai"
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
@@ -84,7 +86,7 @@ const handleClose=()=>{
             <h4>{props.nombre} {props.apellido}</h4>
             <span>{props.date} {props.time}</span>
             </div>
-            {props.idUser===myId&&<div><Button variant="secondary" onClick={handleShow}>Editar</Button><Button variant="danger">Eliminar</Button></div>}
+            {props.idUser===myId&&<div className={styles.buttonSection}><Button variant="secondary" onClick={handleShow}><AiFillEdit /><span className={styles.buttonPost}>Editar</span></Button><Button variant="danger"><AiFillDelete/><span className={styles.buttonPost}>Eliminar</span></Button></div>}
         
             <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

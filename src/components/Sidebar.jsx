@@ -39,14 +39,14 @@ export const Sidebar=()=>{
     <div className={styles.sidebar}>
         <div className={styles.menu}>
             <ul>
-                <li onClick={homeHandler}>Inicio <AiOutlineHome className={styles.menuLogo}/></li>
-                <li onClick={profileHandler}>Perfil <CgProfile className={styles.menuLogo}/></li>
-                <li onClick={friendsHandler}>Amigos <FaUserFriends className={styles.menuLogo}/></li>
-                <li onClick={searchHandler}>Buscar <AiOutlineSearch className={styles.menuLogo}/></li>
+                <li onClick={homeHandler}><div><p className={styles.menuOption}>Inicio </p></div><div><AiOutlineHome className={styles.menuLogo}/></div></li>
+                <li onClick={profileHandler}><div><p className={styles.menuOption}>Perfil</p></div> <div><CgProfile className={styles.menuLogo}/></div></li>
+                <li onClick={friendsHandler}><div><p className={styles.menuOption}>Amigos</p></div><div><FaUserFriends className={styles.menuLogo}/></div> </li>
+                <li onClick={searchHandler}><div><p className={styles.menuOption}>Buscar</p></div> <div><AiOutlineSearch className={styles.menuLogo}/></div></li>
             </ul>
         </div>
         <div className={styles.exitDiv} onClick={logOutHandler}>
-        Cerrar sesion <CgLogOff className={styles.exitLogo}/>
+        <p className={styles.menuOption}>Cerrar sesion</p> <CgLogOff className={styles.exitLogo}/>
         </div>
     
     </div>

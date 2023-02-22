@@ -27,7 +27,7 @@ function App() {
         
        
         
-        <div className={styles.main}>
+        
         <Routes>
         {/*<Route path="/" element={<Login/>} />*/}
         <Route path="/" element={loggedIn?<Layout><Home/></Layout>:<Login onLogin={()=>setLoggedIn(true)}/>} />
@@ -42,7 +42,7 @@ function App() {
         <Route path="/home" element={<Layout><Home/></Layout>}/>
         <Route path={"*"} element={ <Login/> }/>
         </Routes>
-        </div>
+        
         
         
         
