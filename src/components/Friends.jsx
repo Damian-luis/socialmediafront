@@ -21,7 +21,7 @@ export const Friends=()=>{
   },[])
     return <>
     <div className={styles.app}>
-      {/*<Sidebar/>*/}
+      
 
    
    <div className={styles.containerPrincipal}>

@@ -44,6 +44,10 @@
   width:20px;
   height: 20px;
 }
+.formProfile{
+  display: flex;
+  flex-direction: column
+}
 @media only screen and (max-width: 600px) {
   .containerPrincipal{
     padding-left: 0px;

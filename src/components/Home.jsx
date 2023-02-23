@@ -13,7 +13,7 @@ import { getPostData } from "../reducers/data/dataSlice";
 import { PostCard } from "./PostCard";
 import { Layout } from "../layout/layout";
 import { addSesion } from "../reducers/users/usersSilce";
-
+import SpinnerComponent  from "./Spinner"
 import useGetUserData from "../helpers/useGetUserData";
 export const Home=()=>{
   const isLogged=localStorage.getItem('logged')
@@ -78,7 +78,7 @@ export const Home=()=>{
    
    {friendsPosts.length>0?friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})
    :
-   <h4>Parece que aun no sigues a nadie. Conoce gente y vive sus historias ;)</h4>
+   <SpinnerComponent/>
    }
   </div>
 

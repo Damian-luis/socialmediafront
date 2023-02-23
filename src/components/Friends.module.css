@@ -13,3 +13,8 @@
   align-self: flex-start;
   padding:30px
 }
+@media only screen and (max-width: 600px) {
+  .containerPrincipal{
+    padding-left:0px
+  }
+}

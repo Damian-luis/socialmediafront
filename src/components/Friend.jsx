@@ -37,8 +37,8 @@ export const Friend=(props)=>{
         <p>{props.mail}</p>
         </div>
         <div className={styles.cardFriend}>
-        <Button variant="primary" type="submit" value={props.id} onClick={profileHandler}>Ver perfil</Button>
-        <Button variant="primary" type="submit" value={props.id} onClick={followHandler}>Seguir usuario</Button>
+        <Button variant="primary" type="submit" value={props.id} onClick={profileHandler}>Ver <span className={styles.buttonOption}>perfil</span></Button>
+        <Button variant="primary" type="submit" value={props.id} onClick={followHandler}>Seguir <span className={styles.buttonOption}>usuario</span></Button>
         </div>
 
     </div>

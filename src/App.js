@@ -36,9 +36,9 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/search" element={<Layout><Search/></Layout>}/>
         <Route path="/visit-profile" element={<Layout><VisitProfile/></Layout>}/>
-        {/*isLogged===true?
-          <Route path='/home' element={<Home/>}/>
-        :null*/}
+        {/*loggedIn===true?
+          <Route path='/home' element={<Layout><Home/></Layout>}/>
+  :null*/}
         <Route path="/home" element={<Layout><Home/></Layout>}/>
         <Route path={"*"} element={ <Login/> }/>
         </Routes>
