@@ -19,6 +19,7 @@ export const Sidebar=()=>{
          localStorage.removeItem('mail')
          localStorage.removeItem('name')
          localStorage.removeItem('lastname')
+         localStorage.removeItem('urlProfile')
          dispatch(finishSesion())
          dispatch(finishSession())
          navigate("/")

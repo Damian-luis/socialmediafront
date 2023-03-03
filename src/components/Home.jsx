@@ -26,11 +26,11 @@ export const Home=()=>{
     
     const mail=localStorage.getItem('mail')
     const friendsPosts = useSelector(state=>state.data.publicacionesAmigos)
-  
+ 
     const getData = async() =>{
       try{
         const userData=await axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/getUserData/`+id).then(e=>{
-          
+           
           dispatch(addSesion({
             mail:e.data.user[0].mail,
             password:e.data.user[0].password,
@@ -40,10 +40,11 @@ export const Home=()=>{
             id:e.data.user[0].id,
             date:e.data.user[0].date,
             time:e.data.user[0].time,
-            country:e.data.user[0].country,
+            country:e.data.user[0].country, 
             liveCountry:e.data.user[0].liveCountry,
             birthday:e.data.user[0].birthday,
-            ocupation:e.data.user[0].ocupation  
+            ocupation:e.data.user[0].ocupation,
+            urlProfile:e.data.user[0].urlProfile
         }))
         })
 
@@ -76,7 +77,7 @@ export const Home=()=>{
         <div className={styles.containerPrincipal}>
    <CreatePost/>
    
-   {friendsPosts.length>0?friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})
+   {friendsPosts.length>0?friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion} urlProfile={e.urlProfile}  />})
    :
    <SpinnerComponent/>
    }

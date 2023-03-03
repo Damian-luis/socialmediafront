@@ -8,6 +8,7 @@ const initialState = {
  lastname:"",
  date:"",
  time:"",
+ urlProfile:"",
  isLoggedIn:false
 }
 
@@ -29,7 +30,7 @@ export const userSlice = createSlice({
       state.value += action.payload
     },
     addSesion:(state,action)=>{
-      console.log(action)
+      
         state.mail=action.payload.mail
         state.password=action.payload.password
         state.isLoggedIn=action.payload.isLoggedIn
@@ -42,6 +43,7 @@ export const userSlice = createSlice({
         state.liveCountry=action.payload.liveCountry
         state.birthday=action.payload.birthday
         state.ocupation=action.payload.ocupation
+        state.urlProfile=action.payload.urlProfile
     },
     finishSesion:(state)=>{
         state.mail=""
@@ -56,6 +58,7 @@ export const userSlice = createSlice({
         state.liveCountry=""
         state.birthday=""
         state.ocupation=""
+        state.urlProfile=""
     }
   },
 })

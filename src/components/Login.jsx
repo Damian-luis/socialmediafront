@@ -33,6 +33,7 @@ export const Login=()=>{
          localStorage.setItem('mail',e.data.user[0].mail)
          localStorage.setItem('logged',true)
          localStorage.setItem('id',e.data.user[0].id,)
+         localStorage.setItem('urlProfile',e.data.user[0].urlProfile)
            setUser({
                 mail:"",
                 password:""
@@ -78,6 +79,7 @@ setCheckPassword(!checkPassword)
     
     
     </div>
+   
         </div>
 }
 

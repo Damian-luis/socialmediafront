@@ -13,6 +13,7 @@ export const CreatePost=()=>{
     const name =localStorage.getItem("name");
     const lastname =localStorage.getItem("lastname");
     const id =localStorage.getItem("id");
+    const urlProfile =localStorage.getItem('urlProfile')
     const dispatch=useDispatch()
     const [post,setPost]=useState({publicacion:""})
     const postHanlder=(e)=>{
@@ -70,7 +71,7 @@ export const CreatePost=()=>{
     return <>
     <div className={styles.formContainer}>
         <div className={styles.formContainerLeft}>
-        <img src="https://www.seekpng.com/png/full/115-1150053_avatar-png-transparent-png-royalty-free-default-user.png" className={styles.picture}></img>
+        <img src={urlProfile} className={styles.picture}></img>
         </div>
         <div className={styles.formContainerRight}>
     <form className={styles.form} onSubmit={sendPost}>

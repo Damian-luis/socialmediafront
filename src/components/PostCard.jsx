@@ -12,7 +12,9 @@ import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
 export const PostCard=(props)=>{
+  console.log(props)
     const idPublicacion=props.idPublicacion
+    const urlProfile =localStorage.getItem('urlProfile')
     const myId = localStorage.getItem("id")
     const [show, setShow] = useState(false);
 
@@ -80,7 +82,7 @@ const handleClose=()=>{
     <div className={styles.card}>
         <div className={styles.nombre} /*onClick={profileHandler}*/>
             <div className={styles.nombreLeft}>
-            <img src="https://www.seekpng.com/png/full/115-1150053_avatar-png-transparent-png-royalty-free-default-user.png" className={styles.picture}></img>
+            <img src={props.urlProfile} className={styles.picture}></img>
             </div>
             <div className={styles.nombreRight}>
             <h4>{props.nombre} {props.apellido}</h4>
@@ -113,7 +115,7 @@ const handleClose=()=>{
             <p>{props.publicacion}</p>
         </div>
        <div>
-        <AiFillHeart className={liked?styles.heartLiked:styles.heartUniked} onClick={reactHandler}/> {props.usersLinked.length}  reacciones
+       <AiFillHeart className={liked?styles.heartLiked:styles.heartUniked} onClick={reactHandler}/> {props.usersLinked.length}  reacciones
         </div>
         
             

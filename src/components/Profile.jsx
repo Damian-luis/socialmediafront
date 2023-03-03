@@ -18,6 +18,7 @@ import { useState } from "react";
 import axios from "axios";
 export const Profile=()=>{
   const id =localStorage.getItem('id')
+  const urlProfile =localStorage.getItem('urlProfile')
   useGetUserData(id)
   const myPosts = useSelector(state=>state.data.misPublicaciones)
   const myInfo = useSelector(state=>state.user)
@@ -52,12 +53,31 @@ export const Profile=()=>{
 const editHandler=(e)=>{
   setEdit({...edit,[e.target.name]:e.target.value})
 }
+//PERFIL PICTURE SETTINGS
 
+const [file,setFile]=useState(null)
+const sendFile=async(e)=>{
+  const data=new FormData()
+  data.append("archivo",file)
+  console.log(file)
+  e.preventDefault()
+  await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/updateProfilePicture/${id}`,data).then(e=>{console.log(e.data)})
+}
+const fileHandler=(e)=>{
+  setFile(e.target.files[0])
+  
+}
     return <div className={styles.containerPrincipal}>
 
     <div className={styles.portada}>
       <div className={styles.portadaUp}>
-        <div><img src={"https://www.seekpng.com/png/full/115-1150053_avatar-png-transparent-png-royalty-free-default-user.png"} className={styles.picture}/></div>
+        <div> 
+          <form onSubmit={sendFile}>
+          <img src={urlProfile} className={styles.picture}/>
+          <input type="file" onChange={fileHandler}></input>
+          <button>Cambiar foto</button>
+          </form>
+          </div> 
         <div className={styles.portadaUpInside}><div className={styles.nombre}><h1>{myInfo.name} {myInfo.lastname}</h1></div><div className={styles.editProfile}> <Button variant="secondary" onClick={handleEditProfile}><AiFillEdit/> Editar perfil</Button> </div></div>
       </div>
       <Modal show={show} onHide={handleClose}>
@@ -120,7 +140,7 @@ const editHandler=(e)=>{
 
 
     <div className={styles.publicaciones}>
-   {myPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} idPublicacion={e.idPublicacion} date={e.date} time={e.time} usersComments={e.usersComments} usersLinked={e.usersLinked} idUser={e.idUser}/>})}
+   {myPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} idPublicacion={e.idPublicacion} date={e.date} time={e.time} usersComments={e.usersComments} usersLinked={e.usersLinked} idUser={e.idUser} urlProfile={urlProfile}/>})}
    </div>
 
    </div>
