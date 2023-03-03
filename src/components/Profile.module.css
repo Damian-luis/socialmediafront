@@ -48,6 +48,9 @@
   display: flex;
   flex-direction: column
 }
+.inputFile{
+  display: none;
+}
 @media only screen and (max-width: 600px) {
   .containerPrincipal{
     padding-left: 0px;

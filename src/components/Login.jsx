@@ -64,7 +64,7 @@ setCheckPassword(!checkPassword)
       
 
         <label>Contraseña</label>
-        <div><input type={checkPassword===true?"password":"text"} placeholder="Ingresar contraseña" onChange={passwordHandler}></input><span><AiFillEye onClick={seePassword} className={styles.seePassword}/></span></div>
+        <div className={styles.passwordInput}><input type={checkPassword===true?"password":"text"} placeholder="Ingresar contraseña" onChange={passwordHandler}></input><span><AiFillEye onClick={seePassword} className={styles.seePassword}/></span></div>
         
       
       

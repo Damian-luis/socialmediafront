@@ -14,7 +14,7 @@ export const Search=()=>{
   const [noFriends,setNoFriends]=useState(null)
   const getFriends=async()=>{
       axios.get(`${process.env.REACT_APP_URL_BACKEND}/relationships/allFollows/`+id).then((e)=>{
-      
+         console.log(e.data)
         setFriends(e.data.friends)
         setNoFriends(e.data.noFriends)
       })

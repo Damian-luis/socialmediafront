@@ -21,7 +21,8 @@
     align-items: center;
 }
 .register{
-    margin-top:20px
+    margin-top:20px;
+    text-align: center;
 }
 input:focus{
     border:0;
@@ -32,9 +33,18 @@ input:focus{
     width:20px;
     height: 20px;
 }
+.passwordInput{
+    display: flex;
+}
 @media only screen and (max-width: 600px) {
     .formContainer{
         width: 80%;
+    }
+    .passwordInput{
+        display: flex;
+    }
+    .register{
+        text-align: center;
     }
 }
 @media only screen and (min-width: 600px) {

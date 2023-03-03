@@ -7,6 +7,7 @@ import styles from "./Friend.module.css";
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 export const Friend=(props)=>{
+    console.log(props)
     const id=localStorage.getItem("id")
     const dispatch = useDispatch()
     const navigate=useNavigate()

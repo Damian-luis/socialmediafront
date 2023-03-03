@@ -74,8 +74,11 @@ const fileHandler=(e)=>{
         <div> 
           <form onSubmit={sendFile}>
           <img src={urlProfile} className={styles.picture}/>
-          <input type="file" onChange={fileHandler}></input>
-          <button>Cambiar foto</button>
+          <label for="file-input" class="custom-file-upload">
+            Seleccionar foto
+          </label>
+          <input type="file" onChange={fileHandler} id="file-input" className={styles.inputFile}></input>
+          <button>Actualizar foto</button>
           </form>
           </div> 
         <div className={styles.portadaUpInside}><div className={styles.nombre}><h1>{myInfo.name} {myInfo.lastname}</h1></div><div className={styles.editProfile}> <Button variant="secondary" onClick={handleEditProfile}><AiFillEdit/> Editar perfil</Button> </div></div>

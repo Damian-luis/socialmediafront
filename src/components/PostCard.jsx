@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
 export const PostCard=(props)=>{
-  console.log(props)
+  
     const idPublicacion=props.idPublicacion
     const urlProfile =localStorage.getItem('urlProfile')
     const myId = localStorage.getItem("id")
