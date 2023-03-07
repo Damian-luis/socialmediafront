@@ -13,6 +13,7 @@ import { Sidebar } from './components/Sidebar.jsx';
 import { Layout } from './layout/layout.jsx';
 import styles from "./App.module.css";
 import { useEffect,useState } from 'react';
+import { Info } from './components/Info.jsx';
 
 function App() {
   /*const isLoggeda=useSelector(state=>state.user.isLoggedIn)
@@ -36,6 +37,7 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/search" element={<Layout><Search/></Layout>}/>
         <Route path="/visit-profile" element={<Layout><VisitProfile/></Layout>}/>
+        <Route path="/info" element={<Layout><Info/></Layout>}/>
         {/*loggedIn===true?
           <Route path='/home' element={<Layout><Home/></Layout>}/>
   :null*/}

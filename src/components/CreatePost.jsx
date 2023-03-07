@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import useGetUserData from "../helpers/useGetUserData";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios" 
-export const CreatePost=()=>{
+export const CreatePost=()=>{  
     
     const name =localStorage.getItem("name");
     const lastname =localStorage.getItem("lastname");

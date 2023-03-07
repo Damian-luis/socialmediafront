@@ -4,6 +4,7 @@ import {CgProfile} from "react-icons/cg"
 import {FaUserFriends} from "react-icons/fa"
 import {AiOutlineHome} from "react-icons/ai"
 import {AiOutlineSearch} from "react-icons/ai"
+import {FcIdea} from "react-icons/fc"
 import styles from "./Sidebar.module.css"
 import {useSelector,useDispatch} from "react-redux"
 import { finishSesion } from "../reducers/users/usersSilce";
@@ -36,6 +37,9 @@ export const Sidebar=()=>{
     const searchHandler=()=>{
         navigate("/search")
     }
+    const infoHandler=()=>{
+        navigate("/info")
+    }
     return <>
     <div className={styles.sidebar}>
         <div className={styles.menu}>
@@ -44,6 +48,7 @@ export const Sidebar=()=>{
                 <li onClick={profileHandler}><div><p className={styles.menuOption}>Perfil</p></div> <div><CgProfile className={styles.menuLogo}/></div></li>
                 <li onClick={friendsHandler}><div><p className={styles.menuOption}>Amigos</p></div><div><FaUserFriends className={styles.menuLogo}/></div> </li>
                 <li onClick={searchHandler}><div><p className={styles.menuOption}>Buscar</p></div> <div><AiOutlineSearch className={styles.menuLogo}/></div></li>
+                <li onClick={infoHandler}><div><p className={styles.menuOption}>Informacion</p></div> <div><FcIdea className={styles.menuLogo}/></div></li>
             </ul>
         </div>
         <div className={styles.exitDiv} onClick={logOutHandler}>

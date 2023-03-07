@@ -32,6 +32,7 @@ export const Search=()=>{
    {noFriends && noFriends.map(e=>{return <Friend name={e.name} lastname={e.lastname} id={e.id} mail={e.mail}/>})}
   
    </div>
+   
     </div>
   </>
 }
