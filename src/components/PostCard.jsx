@@ -11,6 +11,7 @@ import {AiFillDelete} from "react-icons/ai"
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
+import { ToastContainer, toast } from 'react-toastify';
 export const PostCard=(props)=>{
   
     const idPublicacion=props.idPublicacion
@@ -21,7 +22,37 @@ export const PostCard=(props)=>{
   const handleCloseSend = async(e) => {
     e.preventDefault()
     await axios.put(`${process.env.REACT_APP_URL_BACKEND}/posts/updatePost/${myId}/${idPublicacion}`,post)
-        .then(e=>{alert(e.data.message)})
+        .then(e=>{
+          
+          if(e.data.status===true){
+            console.log("tosat wrokin")
+            console.log(e.data.message)
+            toast.info(`${e.data.message}`, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                
+                });
+                
+        }
+        else{
+            toast.error(`${e.data.message}`, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+        }
+        })
         setPost({
           publicacion:props.publicacion,
           nombre:name,

@@ -5,6 +5,13 @@ import { PostCard } from "./PostCard";
 import { useSelector,useDispatch } from "react-redux";
 import axios from "axios";
 import { useEffect,useState } from "react";
+import {MdOutlineWatchLater} from "react-icons/md"
+import {BsFillHouseDoorFill} from "react-icons/bs"
+import {FaMapMarkerAlt} from "react-icons/fa"
+import {FaUserGraduate} from "react-icons/fa"
+import {AiFillMail} from "react-icons/ai"
+import {AiFillEdit} from "react-icons/ai"
+import {RiCake2Fill} from "react-icons/ri"
 export const VisitProfile=()=>{
   const id = useSelector(state=>state.userSelected.id)
   
@@ -28,6 +35,11 @@ export const VisitProfile=()=>{
             date:e.data.user[0].date,
             time:e.data.user[0].time,
             id:e.data.user[0].id,
+            birthday:e.data.user[0].birthday,
+            country:e.data.user[0].country,
+            liveCountry:e.data.user[0].liveCountry,
+            urlProfile:e.data.user[0].urlProfile,
+            ocupation:e.data.user[0].ocupation
  })
         console.log(e.data)
         setPost(e.data.post)
@@ -37,20 +49,50 @@ export const VisitProfile=()=>{
     getData()
   },[])
     return <>
-    <div className={styles.app}>
+    
 
    
    <div className={styles.containerPrincipal}>
    
-   <div className={styles.nombre}>
-    <h1>{dataUser.name} {dataUser.lastname}</h1>
-   </div>
-   <span className={styles.nombreUsuario}>Publicaciones de {dataUser.name} {dataUser.lastname}</span>
-  <div className={styles.posts}>
-   
-  {post && post.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})}
-  </div>
-   </div>
+   <div className={styles.portada}>
+      <div className={styles.portadaUp}>
+        
+        <div className={styles.portadaUpInside}><div className={styles.nombre}><h1>{dataUser.name} {dataUser.lastname}</h1></div><div className={styles.editProfile}>  </div></div>
+      </div>
+      <div className={styles.portadaDown}>
+        <div className={styles.detalles}>
+          <ul>
+            <li>
+              <MdOutlineWatchLater className={styles.logo}/> Miembro desde {dataUser.date}
+            </li>
+            <li>
+              <BsFillHouseDoorFill className={styles.logo}/> Vive en {dataUser.country}
+            </li>
+            <li>
+              <FaMapMarkerAlt className={styles.logo}/> De {dataUser.liveCountry}
+              </li>
+              <li>
+                <FaUserGraduate className={styles.logo}/> Ocupación {dataUser.ocupation}
+              </li>
+            <li>
+              <AiFillMail className={styles.logo}/>Correo {dataUser.mail}
+            </li>
+            <li>
+              <RiCake2Fill className={styles.logo}/>Fecha de nacimiento {dataUser.birthday}
+            </li>
+          </ul>
+        </div>
+      </div>
+      
     </div>
+
+
+   
+  <div className={styles.publicaciones}>
+   {post && post.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})}
+  </div>
+  
+   </div>
+   
   </>
 }

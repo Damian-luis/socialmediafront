@@ -15,6 +15,8 @@ import Button from 'react-bootstrap/Button';
 import useGetUserData from "../helpers/useGetUserData";
 import Modal from 'react-bootstrap/Modal';
 import { useState } from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 export const Profile=()=>{
   const id =localStorage.getItem('id')
@@ -45,7 +47,35 @@ export const Profile=()=>{
     await axios.put(`${process.env.REACT_APP_URL_BACKEND}/users/updateUser/${id}`,edit)
         .then(e=>{
           
-          alert(e.data.message)})
+          if(e.data.status===true){
+            console.log("tosat wrokin")
+            console.log(e.data.message)
+            toast.info(`${e.data.message}`, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                
+                });
+                
+        }
+        else{
+            toast.error(`${e.data.message}`, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+        }
+      })
         
     setShow(false)
     console.log(edit)
@@ -139,6 +169,7 @@ const fileHandler=(e)=>{
           </ul>
         </div>
       </div>
+      
     </div>
 
 

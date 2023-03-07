@@ -6,10 +6,10 @@ import {useDispatch,useSelector} from "react-redux"
 import { addPostData } from "../reducers/data/dataSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import useGetUserData from "../helpers/useGetUserData";
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios"
 export const CreatePost=()=>{
-    const notify = () => toast("Wow so easy!");
+    
     const name =localStorage.getItem("name");
     const lastname =localStorage.getItem("lastname");
     const id =localStorage.getItem("id");

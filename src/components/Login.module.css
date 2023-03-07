@@ -3,22 +3,39 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    
+}
+.imgContainer{
+    width: 50%;
+    height: 100vh;
+}
+.img img{
+    width: 100%;
+    height: 100vh;
+}
+.introducing{
+    padding: 10px
+}
+.introducing h4{
+    color: white;
+    text-align: center;
 }
 .formContainer{
-    width: 30%;
+    width: 50%;
     border-radius:20px;
-    background-color: white;
     margin: 20px;
+    height: 100vh;
 }
 .form{
+
     background-color:white;
     border-radius: 20px;
     margin: 40px;
     display: flex;
     flex-direction: column;
+    
     align-items: center;
+    padding: 50px;
 }
 .register{
     margin-top:20px;
@@ -63,7 +80,5 @@ input:focus{
     }
 }
 @media only screen and (min-width: 992px) {
-    .formContainer{
-        width: 30%;
-    }
+    
 }

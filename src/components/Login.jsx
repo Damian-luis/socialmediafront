@@ -9,6 +9,7 @@ import {AiFillEye} from "react-icons/ai";
 import styles from "./Login.module.css"
 import axios from "axios"
 import InputGroup from 'react-bootstrap/InputGroup';
+import computer from "../assets/computer.png"
 export const Login=()=>{
   
     const dispatch = useDispatch()
@@ -53,16 +54,21 @@ setCheckPassword(!checkPassword)
     
     const mail=useSelector(state=>state.user.mail)
     return <div className={styles.container}>
+      <div className={styles.imgContainer}>
+        <div className={styles.img}>
+          <img src={computer}></img>
+        </div>
+      </div> 
+
       <div className={styles.formContainer}>
+        <div className={styles.introducing}>
+          <h4>Comparte, comenta y disfruta con tus amigos</h4>
+        </div>
         <form onSubmit={submitHandler} className={styles.form}>
       
         <label>Correo electrónico</label>
         <input type="email" placeholder="Ingresar correo" onChange={mailHandler} />
-        
-      
-
-      
-
+       
         <label>Contraseña</label>
         <div className={styles.passwordInput}><input type={checkPassword===true?"password":"text"} placeholder="Ingresar contraseña" onChange={passwordHandler}></input><span><AiFillEye onClick={seePassword} className={styles.seePassword}/></span></div>
         
