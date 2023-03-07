@@ -7,7 +7,7 @@ import { addPostData } from "../reducers/data/dataSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import useGetUserData from "../helpers/useGetUserData";
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios"
+import axios from "axios" 
 export const CreatePost=()=>{
     
     const name =localStorage.getItem("name");
