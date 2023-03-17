@@ -87,10 +87,12 @@ const editHandler=(e)=>{
 
 const [file,setFile]=useState(null)
 const sendFile=async(e)=>{
+  
   const data=new FormData()
   data.append("archivo",file)
   console.log(file)
   e.preventDefault()
+  
   await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/updateProfilePicture/${id}`,data).then(e=>{console.log(e.data)})
 }
 const fileHandler=(e)=>{
@@ -108,7 +110,7 @@ const fileHandler=(e)=>{
             Cambiar foto
           </label>
           <input type="file" onChange={fileHandler} id="file-input" className={styles.inputFile}></input>
-          <Button variant="secondary">Subir</Button>
+          <Button variant="secondary" onClick={sendFile}>Subir</Button>
           </form>
           </div> 
         <div className={styles.portadaUpInside}><div className={styles.nombre}><h1>{myInfo.name} {myInfo.lastname}</h1></div><div className={styles.editProfile}> <Button variant="secondary" onClick={handleEditProfile}><AiFillEdit/> Editar perfil</Button> </div></div>
