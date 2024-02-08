@@ -95,8 +95,19 @@ export const Sidebar=()=>{
                 <li onClick={infoHandler}><div><p className={styles.menuOption}>Informacion</p></div> <div><FcIdea className={styles.menuLogo}/></div></li>
             </ul>
         </div>
-        <div>
-            {weatherData?<div>{weatherData.current.temp_c}<img src={weatherData.current.condition.icon}/>{weatherData.location.name}, {weatherData.location.country}</div>:<p>gpla</p>}
+        <div
+        style={{
+            alignSelf:"center",
+            color:"white",
+            margin:"10px"
+        }}
+        >
+            {weatherData?<div>
+                <div style={{
+                    justifyContent:""
+                }}>{weatherData.current.temp_c}<img src={weatherData.current.condition.icon}/></div>
+                <div>{weatherData.location.name}, {weatherData.location.country}</div><div/></div>
+                :<p>gpla</p>}
         </div>
         <div className={styles.exitDiv} onClick={logOutHandler}>
         <p className={styles.menuOption}>Cerrar sesion</p> <CgLogOff className={styles.exitLogo}/>
