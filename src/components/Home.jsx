@@ -76,11 +76,15 @@ export const Home=()=>{
         
         <div className={styles.containerPrincipal}>
    <CreatePost/>
-   
+   <div style={{
+    width:"55%"
+   }}>
    {friendsPosts.length>0?friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion} urlProfile={e.urlProfile}  />})
    :
    <SpinnerComponent/>
+   
    }
+   </div>
   </div>
 
 

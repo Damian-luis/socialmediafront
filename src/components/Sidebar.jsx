@@ -31,7 +31,6 @@ export const Sidebar=()=>{
 
         setWeatherData(weatherData);
       } catch (error) {
-        console.error('Error fetching data:', error);
         setError('No se ha podido acceder a su ubicación o recuperar datos meteorológicos.')
       }
     };
@@ -50,7 +49,7 @@ export const Sidebar=()=>{
     const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${latitude},${longitude}`;
 
     const response = await axios.get(apiUrl);
-    console.log(response)
+    
     return response.data;
   };
 
