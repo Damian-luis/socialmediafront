@@ -1,0 +1,70 @@
+.sidebar{
+    width: 20%;
+    height:100vh;
+    background-color:rgb(11, 56, 180);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    position: fixed;
+    right: 0px;
+}
+.exitDiv{
+color: white;
+font-size: 20px;
+padding: 10px;
+display: flex;
+justify-content:center;
+align-self: center;
+margin-bottom: 20px;
+border-radius: 15px;
+}
+.exitDiv:hover{
+    background-color:rgb(41, 86, 211);
+}
+.exitLogo{
+    width: 35px;
+    height: 35px;
+}
+.menu{
+align-self: center;
+color: white;
+font-size:20px
+}
+.menu ul li{
+    list-style: none;
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.menu ul li:hover{
+    background-color:rgb(41, 86, 211);
+}
+.menu ul {
+padding: 20px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.menuLogo{
+    width: 20px;
+    height: 20px;
+}
+@media only screen and (max-width: 600px) {
+    .exitDiv{
+        display: flex;
+        flex-direction: column;
+    }
+    .menuOption{
+        display:none
+    }
+    .sidebar{
+        width: 20%;
+    }
+    
+}
