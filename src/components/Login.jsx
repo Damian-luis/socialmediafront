@@ -10,8 +10,15 @@ import styles from "./Login.module.css"
 import axios from "axios"
 import InputGroup from 'react-bootstrap/InputGroup';
 import computer from "../assets/computer.png"
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
+import Backdrop from '@mui/material/Backdrop';
 export const Login=()=>{
   
+  const [showAlert, setShowAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
     const dispatch = useDispatch()
     const navigate=useNavigate()
     const [user,setUser]=useState({
@@ -28,23 +35,35 @@ export const Login=()=>{
         }
     const submitHandler=async(e)=>{
         e.preventDefault()
-        await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/login`,user).then(e=>{
-          localStorage.setItem('name',e.data.user[0].name)
-          localStorage.setItem('lastname',e.data.user[0].lastname)
-         localStorage.setItem('mail',e.data.user[0].mail)
-         localStorage.setItem('logged',true)
-         localStorage.setItem('id',e.data.user[0].id,)
-         localStorage.setItem('urlProfile',e.data.user[0].urlProfile)
-           setUser({
-                mail:"",
-                password:""
-            })
-            
-            navigate("/home")
-        }).catch(e=>{
-          
-          setError(e.response.data.message)
-        });
+        if (!user.mail || !user.password) {
+          setShowAlert(true);
+          return;
+        }
+      
+        try {
+          setLoading(true); 
+    
+          await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/login`, user).then(e => {
+            localStorage.setItem('name', e.data.user[0].name);
+            localStorage.setItem('lastname', e.data.user[0].lastname);
+            localStorage.setItem('mail', e.data.user[0].mail);
+            localStorage.setItem('logged', true);
+            localStorage.setItem('id', e.data.user[0].id);
+            localStorage.setItem('urlProfile', e.data.user[0].urlProfile);
+            setUser({
+              mail: "",
+              password: ""
+            });
+            navigate("/home");
+          }).catch(e => {
+            setError(e.response.data.message);
+          });
+        } catch (error) {
+          setError(error.response.data.message);
+        } finally {
+          setLoading(false);
+        }
+        
         
     }
     const [checkPassword,setCheckPassword]=useState(true)
@@ -59,7 +78,13 @@ setCheckPassword(!checkPassword)
           <img src={computer}></img>
         </div>
       </div> 
-
+      {loading && (
+  <Backdrop open={loading} className={styles.backdrop}>
+    <div className={styles.loadingContainer}>
+      <CircularProgress />
+    </div>
+  </Backdrop>
+)}
       <div className={styles.formContainer}>
         <div className={styles.introducing}>
           <h4>Comparte, comenta y disfruta con tus amigos</h4>
@@ -77,7 +102,16 @@ setCheckPassword(!checkPassword)
       <Button variant="primary" type="submit">
         Iniciar sesión
       </Button>
-      {error}
+                  <Snackbar
+              open={showAlert}
+              autoHideDuration={6000}
+              onClose={() => setShowAlert(false)}
+            >
+              <Alert onClose={() => setShowAlert(false)} severity="error">
+                Por favor, ingresa un correo y una contraseña.
+              </Alert>
+            </Snackbar>
+
       <div className={styles.register}>
     <p>Aun no tienes una cuenta? <Link to="/register">Registrate</Link></p>
     </div>
