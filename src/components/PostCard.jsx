@@ -31,6 +31,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import moment from 'moment';
+import Paper from '@mui/material/Paper';
 
 export const PostCard=(props)=>{
   console.log(props)
@@ -199,9 +200,8 @@ const handleClose=()=>{
         </div>
             
         </div>*/}
-
-<Card style={{with:"600px"}}>
-      <CardHeader
+<Paper elevation={12}>
+<CardHeader
         avatar={
           <Avatar
             src={props.urlProfile ? props.urlProfile : undefined}
@@ -231,6 +231,9 @@ const handleClose=()=>{
           <ShareIcon />
         </IconButton>
       </CardActions>
+    </Paper>
+<Card style={{with:"600px"}}>
+      
 
 
 

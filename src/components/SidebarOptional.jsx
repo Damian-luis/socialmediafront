@@ -19,7 +19,36 @@ import { TiWeatherCloudy } from "react-icons/ti";
 import { TiWeatherDownpour } from "react-icons/ti";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { TiWeatherStormy } from "react-icons/ti";
+import { FaRegNewspaper } from "react-icons/fa";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { FaStore } from "react-icons/fa";
 export const SidebarOptional=()=>{
+
+  const requestOptions = {
+    method: 'GET', // Puedes cambiar a 'POST', 'PUT', etc., según tu endpoint
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key':"x1vPCqLL7f7podkB8Tc2O5B1ybN79A2mikHRe7nd",
+    },
+  };
+  
+  fetch("https://json.freeastrologyapi.com/", requestOptions)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Manejar la respuesta JSON
+      console.log(data);
+    })
+    .catch(error => {
+      // Manejar errores
+      console.error('Error:', error);
+    });
+
+
     const [weatherData, setWeatherData] = useState(null);
     const [error, setError] = useState(null);
 
@@ -68,29 +97,23 @@ export const SidebarOptional=()=>{
          dispatch(finishSession())
          navigate("/")
     }
-    const profileHandler=()=>{
-        navigate("/profile")
+    const calendarHandler=()=>{
+        navigate("/calendar")
     }
-    const friendsHandler=()=>{
-        navigate("/friends")
+    const storeHandler=()=>{
+        navigate("/store")
     }
-    const homeHandler=()=>{
-        navigate("/home")
-    }
-    const searchHandler=()=>{
-        navigate("/search")
-    }
-    const infoHandler=()=>{
-        navigate("/info")
+    const newsHandler=()=>{
+        navigate("/news")
     }
     return <>
     
     <div className={styles.sidebar}>
         <div className={styles.menu}>
             <ul>
-                <li onClick={homeHandler}><div><p className={styles.menuOption}>Clima </p></div><div><AiOutlineHome className={styles.menuLogo}/></div></li>
-                <li onClick={profileHandler}><div><p className={styles.menuOption}>Horóscopo</p></div> <div><CgProfile className={styles.menuLogo}/></div></li>
-                <li onClick={friendsHandler}><div><p className={styles.menuOption}>Calendario</p></div><div><FaUserFriends className={styles.menuLogo}/></div> </li>
+                <li onClick={newsHandler}><div><p className={styles.menuOption}>Noticias </p></div><div><FaRegNewspaper className={styles.menuLogo}/></div></li>
+                <li onClick={calendarHandler}><div><p className={styles.menuOption}>Calendario</p></div> <div><FaRegCalendarAlt className={styles.menuLogo}/></div></li>
+                <li onClick={storeHandler}><div><p className={styles.menuOption}>Tienda</p></div><div><FaStore className={styles.menuLogo}/></div> </li>
                 
             </ul>
         </div>
