@@ -14,6 +14,9 @@ import { Layout } from './layout/layout.jsx';
 import styles from "./App.module.css";
 import { useEffect,useState } from 'react';
 import { Info } from './components/Info.jsx';
+import { News } from './components/News.jsx';
+import { Store } from './components/Store.jsx';
+import { Calender } from './components/Calender.jsx';
 
 function App() {
   /*const isLoggeda=useSelector(state=>state.user.isLoggedIn)
@@ -38,6 +41,9 @@ function App() {
         <Route path="/search" element={<Layout><Search/></Layout>}/>
         <Route path="/visit-profile" element={<Layout><VisitProfile/></Layout>}/>
         <Route path="/info" element={<Layout><Info/></Layout>}/>
+        <Route path="/news" element={<Layout><News/></Layout>}/>
+        <Route path="/calendar" element={<Layout><Calender/></Layout>}/>
+        <Route path="/store" element={<Layout><Store/></Layout>}/>
         {/*loggedIn===true?
           <Route path='/home' element={<Layout><Home/></Layout>}/>
   :null*/}
