@@ -106,7 +106,7 @@ export const Sidebar=()=>{
                     justifyContent:""
                 }}>{weatherData.current.temp_c}<img src={weatherData.current.condition.icon}/></div>
                 <div>{weatherData.location.name}, {weatherData.location.country}</div><div/></div>
-                :<p>gpla</p>}
+                :<p>No has dado acceso a tu ubicacion</p>}
         </div>
         <div className={styles.exitDiv} onClick={logOutHandler}>
         <p className={styles.menuOption}>Cerrar sesion</p> <CgLogOff className={styles.exitLogo}/>
