@@ -51,7 +51,7 @@ export const News=()=>{
   useEffect(() => {
     getData();
   }, []);
-    return <div style={{ marginLeft: "200px",display:"flex",flexDirection:"column" }}>
+    return <div style={{display:"flex",flexDirection:"column" }}>
     {loading ? (
       <SpinnerComponent />
     ) : news.length > 0 ? (

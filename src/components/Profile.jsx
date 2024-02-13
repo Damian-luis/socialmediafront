@@ -18,10 +18,30 @@ import { useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
+import { useEffect } from "react";
 export const Profile=()=>{
   const id =localStorage.getItem('id')
   const urlProfile =localStorage.getItem('urlProfile')
-  useGetUserData(id)
+  const [userData,setUserData]=useState(null)
+  const [misPublicaciones,setMisPublicaciones]=useState([])
+  const getData = async () => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/getUserData/` + id);
+      setUserData(response.data);
+      setMisPublicaciones(response.data.post)
+      
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  
+  useEffect(() => {
+    getData();
+  }, []);
+
+
+  
+  //useGetUserData(id)
   const myPosts = useSelector(state=>state.data.misPublicaciones)
   const myInfo = useSelector(state=>state.user)
   //Modal logic
@@ -148,36 +168,59 @@ const fileHandler=(e)=>{
         </Modal.Footer>
       </Modal>
       <div className={styles.portadaDown}>
-        <div className={styles.detalles}>
-          <ul>
-            <li>
-              <MdOutlineWatchLater className={styles.logo}/> Miembro desde {myInfo.date}
-            </li>
-            <li>
-              <BsFillHouseDoorFill className={styles.logo}/> Vive en {myInfo.country}
-            </li>
-            <li>
-              <FaMapMarkerAlt className={styles.logo}/> De {myInfo.liveCountry}
-              </li>
-              <li>
-                <FaUserGraduate className={styles.logo}/> Ocupación {myInfo.ocupation}
-              </li>
-            <li>
-              <AiFillMail className={styles.logo}/>Correo {myInfo.mail}
-            </li>
-            <li>
-              <RiCake2Fill className={styles.logo}/>Fecha de nacimiento {myInfo.birthday}
-            </li>
-          </ul>
-        </div>
-      </div>
+  <div className={styles.detalles}>
+    {userData ? (
+      <ul>
+        <li>
+          <MdOutlineWatchLater className={styles.logo}/> Miembro desde {userData.user[0].date}
+        </li>
+        <li>
+          <BsFillHouseDoorFill className={styles.logo}/> Vive en {userData.user[0].country}
+        </li>
+        <li>
+          <FaMapMarkerAlt className={styles.logo}/> De {userData.user[0].liveCountry}
+        </li>
+        <li>
+          <FaUserGraduate className={styles.logo}/> Ocupación {userData.user[0].ocupation}
+        </li>
+        <li>
+          <AiFillMail className={styles.logo}/>Correo {userData.user[0].mail}
+        </li>
+        <li>
+          <RiCake2Fill className={styles.logo}/>Fecha de nacimiento {userData.user[0].birthday}
+        </li>
+      </ul>
+    ) : (
+      <p>Cargando información del usuario...</p>
+    )}
+  </div>
+</div>
       
     </div>
 
 
     <div className={styles.publicaciones}>
-   {myPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} idPublicacion={e.idPublicacion} date={e.date} time={e.time} usersComments={e.usersComments} usersLinked={e.usersLinked} idUser={e.idUser} urlProfile={urlProfile}/>})}
-   </div>
+  {misPublicaciones.length > 0 ? (
+    misPublicaciones.map((e) => (
+      <PostCard
+        key={e.idPublicacion} 
+        publicacion={e.publicacion}
+        nombre={e.nombre}
+        apellido={e.apellido}
+        idPublicacion={e.idPublicacion}
+        date={e.date}
+        time={e.time}
+        usersComments={e.usersComments}
+        usersLinked={e.usersLinked}
+        idUser={e.idUser}
+        urlProfile={urlProfile}
+      />
+    ))
+  ) : (
+    <p>No hay publicaciones disponibles.</p>
+  )}
+</div>
+
 
    </div>
     

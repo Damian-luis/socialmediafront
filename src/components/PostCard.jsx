@@ -34,7 +34,7 @@ import moment from 'moment';
 import Paper from '@mui/material/Paper';
 
 export const PostCard=(props)=>{
-  console.log(props)
+ 
   const formattedTime = moment(`${props.date} ${props.time}`, 'DD/MM/YYYY HH:mm:ss').fromNow();
   const avatarInitial = `${props.nombre.charAt(0)}${props.apellido.charAt(0)}`;
     const idPublicacion=props.idPublicacion
@@ -132,74 +132,11 @@ const handleClose=()=>{
         await axios.put(`${process.env.REACT_APP_URL_BACKEND}/interactions/reactPost/${props.idPublicacion}/${myId}/${name}/${lastname}`).then(e=>{console.log(e.data.response)})
         setComment("")
     }
-    return <>{/*}
-    <div className={styles.card}>
-        <div className={styles.nombre} >
-            <div className={styles.nombreLeft}>
-            <img src={props.urlProfile} className={styles.picture}></img>
-            </div>
-            <div className={styles.nombreRight}>
-            <h4>{props.nombre} {props.apellido}</h4>
-            <span>{props.date} {props.time}</span>
-            </div>
-            {props.idUser===myId&&<div className={styles.buttonSection}><Button variant="secondary" onClick={handleShow}><AiFillEdit /><span className={styles.buttonPost}>Editar</span></Button><Button variant="danger"><AiFillDelete/><span className={styles.buttonPost}>Eliminar</span></Button></div>}
-        
-            <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Editar publicacion</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <form>
-                <input type="text" value={post.publicacion} onChange={postHanlder}/>
-            </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancelar
-          </Button>
-          <Button variant="primary" onClick={handleCloseSend}>
-            Guardar cambios
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-        </div>
-        
-        <div className={styles.publicacion}>
-            <p>{props.publicacion}</p>
-        </div>
-       <div>
-       <AiFillHeart className={liked?styles.heartLiked:styles.heartUniked} onClick={reactHandler}/> {props.usersLinked.length}  reacciones
-        </div>
-        
-            
-             
-        {props.usersComments.length > 0 && props.usersComments.map(e=>{return <div className={styles.commentCard}>
-            <div className={styles.nombre}>
-                <div className={styles.commentsLeft}>
-                <img src="https://www.seekpng.com/png/full/115-1150053_avatar-png-transparent-png-royalty-free-default-user.png" className={styles.picture}></img>
-                </div>
-                <div className={styles.commentsRight}>
-                <h4>{e.name} {e.lastname}</h4> <span>{e.data} {e.time}</span>
-                </div>
-                
-            </div>
-        
-            <div className={styles.comment}>
-            <p>{e.comment}</p>
-            </div>
-        </div>})}
-
-                <div>
-            <form onSubmit={sendComment}>
-                <input placeholder="Escribe un comentario..." onChange={commentHandler} value={comment}/>
-                <Button variant="primary" type="submit">
-                Publicar
-                </Button>
-            </form>
-        </div>
-            
-        </div>*/}
+    return <>
+<div style={{
+  margin:"20px",
+  width:"500px"
+}}>
 <Paper elevation={12}>
 <CardHeader
         avatar={
@@ -256,6 +193,6 @@ const handleClose=()=>{
       </div>})}
 
     </Card>
-    
+    </div>
         </>
 }

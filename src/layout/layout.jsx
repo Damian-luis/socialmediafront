@@ -11,14 +11,14 @@ export const Layout=({children})=>{
     
     return <>
      
-     <div className={styles.main}>
-                
-                <main style={{display:"flex"}}>
-                    <Sidebar/>
+     <div>
+           <Sidebar/>
+                <main style={{display:"flex",width:"70%",margin:"auto"}}>
+                    
                     {children}
-                    <SidebarOptional />
+                    
                 </main>
-                
+                <SidebarOptional />
             </div>
         
     

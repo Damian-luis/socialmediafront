@@ -58,12 +58,14 @@ export const Store=()=>{
   useEffect(() => {
     getData();
   }, []);
-    return <div style={{ marginLeft: "200px",marginTop:"20px" }}>
+    return <div style={{marginTop:"20px",display:"flex",flexDirection:"column",alignItems:"center" }}>
       
       
-      <TextField fullWidth label="Buscar..." id="fullWidth" style={{margin:"20px"}}/>
+      <TextField fullWidth label="Buscar..." id="fullWidth" style={{margin:"20px",width:"80%"}}/>
     <div style={{
-      display:"flex"
+      display:"flex",
+      justifyContent:"flex-start",
+      width:"75%"
     }}>
     <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Orden</InputLabel>
@@ -73,7 +75,7 @@ export const Store=()=>{
           value={age}
           label="Orden"
           onChange={handleChange}
-          style={{width:"200px"}}
+          style={{width:"300px"}}
         >
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
@@ -88,7 +90,7 @@ export const Store=()=>{
           value={age}
           label="Precio"
           onChange={handleChange}
-          style={{width:"200px"}}
+          style={{width:"300px"}}
         >
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
@@ -99,12 +101,13 @@ export const Store=()=>{
       
 
   
-    <div style={{display:"flex",flexWrap:"wrap" }}>
+    <div style={{display:"flex",flexWrap:"wrap",width:"90%",justifyContent:"center",gap:"20px" }}>
 
     {loading ? (
       <SpinnerComponent />
     ) : products.length > 0 ? (
       products.map((article) => (
+<Link to={`/store/${article.id}`}>
         <Card sx={{ maxWidth: 200 }} style={{margin:"20px"}}>
       <CardActionArea>
         <CardMedia
@@ -126,6 +129,7 @@ export const Store=()=>{
         </CardContent>
       </CardActionArea>
     </Card>
+    </Link>
       ))
     ) : (
       <p>No hay productos disponibles.</p>

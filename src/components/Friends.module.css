@@ -7,7 +7,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 200px;
 }
 .tusamigos{
   align-self: flex-start;
