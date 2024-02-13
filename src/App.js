@@ -17,6 +17,7 @@ import { Info } from './components/Info.jsx';
 import { News } from './components/News.jsx';
 import { Store } from './components/Store.jsx';
 import { Calender } from './components/Calender.jsx';
+import { Product } from './components/Product.jsx';
 
 function App() {
   /*const isLoggeda=useSelector(state=>state.user.isLoggedIn)
@@ -44,6 +45,7 @@ function App() {
         <Route path="/news" element={<Layout><News/></Layout>}/>
         <Route path="/calendar" element={<Layout><Calender/></Layout>}/>
         <Route path="/store" element={<Layout><Store/></Layout>}/>
+        <Route path="/store/:id" element={<Layout><Product/></Layout>}/>
         {/*loggedIn===true?
           <Route path='/home' element={<Layout><Home/></Layout>}/>
   :null*/}

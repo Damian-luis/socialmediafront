@@ -1,5 +1,5 @@
 .sidebar{
-    width: 200px;
+    width: 15%;
     height:100vh;
     background-color:rgb(11, 56, 180);
     border-top-left-radius: 20px;
@@ -10,6 +10,7 @@
     justify-content: space-between;
     position: fixed;
     right: 0px;
+    top:0px
 }
 .exitDiv{
 color: white;
