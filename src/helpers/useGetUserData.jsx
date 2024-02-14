@@ -11,7 +11,7 @@ export default function useGetUserData(id){
       const fetch=async()=>{
         try{
           const data=await axios.get(`${process.env.REACT_APP_URL_BACKEND}/posts/allPosts/${id}`).then(e=>{return (e.data) })
-         
+         console.log(data)
           dispatch(getPostData({
            misPublicaciones:data.misPublicaciones,
            publicacionesAmigos:data.publicacionesAmigos
