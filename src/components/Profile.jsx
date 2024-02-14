@@ -27,6 +27,8 @@ export const Profile=()=>{
   const getData = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/getUserData/` + id);
+      console.log("intenta hacer peicion")
+      console.log(response)
       setUserData(response.data);
       setMisPublicaciones(response.data.post)
       

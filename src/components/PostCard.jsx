@@ -12,9 +12,15 @@ import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
-
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 //
 
+import SendIcon from '@mui/icons-material/Send';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -34,7 +40,7 @@ import moment from 'moment';
 import Paper from '@mui/material/Paper';
 
 export const PostCard=(props)=>{
- 
+ console.log(props)
   const formattedTime = moment(`${props.date} ${props.time}`, 'DD/MM/YYYY HH:mm:ss').fromNow();
   const avatarInitial = `${props.nombre.charAt(0)}${props.apellido.charAt(0)}`;
     const idPublicacion=props.idPublicacion
@@ -174,11 +180,13 @@ const handleClose=()=>{
 
 
 
-      {props.usersComments.length > 0 && props.usersComments.map(e=>{return <div style={{paddingLeft:"80px"}}>
+      {props.usersComments.length > 0 && props.usersComments.map(e=>{return <div style={{}}>
       
         <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar
+          src={e.urlProfile ? e.urlProfile : undefined}
+          sx={{ bgcolor: red[500] }} aria-label="recipe">
             {e.name.charAt(0)}{e.lastname.charAt(0)}
           </Avatar>
         }
@@ -189,8 +197,41 @@ const handleClose=()=>{
         <Typography variant="body2" color="text.secondary">
           {e.comment}
         </Typography>
+        
+        
       </CardContent>
+
       </div>})}
+
+      <FormControl variant="standard" style={{display:"flex",flexDirection:"row",justifyContent:"space-around"}}>
+        <TextField
+        id="input-with-icon-textfield"
+        placeholder="Escribe un comentario"
+        style={{
+          padding:"10px"
+        }}
+        onChange={commentHandler}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <img
+                        src={urlProfile}
+                        alt="Imagen de perfil"
+                        style={{ width: '24px', height: '24px', borderRadius: '50%' }}  
+                      />
+            </InputAdornment>
+          ),
+        }}
+        variant="standard"
+      />
+                      <IconButton
+                    color="primary"
+                    aria-label="Enviar comentario"
+                    onClick={sendComment}
+                  >
+                    <SendIcon />
+                  </IconButton>
+        </FormControl>
 
     </Card>
     </div>

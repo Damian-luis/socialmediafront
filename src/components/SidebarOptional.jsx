@@ -41,11 +41,11 @@ export const SidebarOptional=()=>{
     })
     .then(data => {
       // Manejar la respuesta JSON
-      console.log(data);
+     // console.log(data);
     })
     .catch(error => {
       // Manejar errores
-      console.error('Error:', error);
+      //console.error('Error:', error);
     });
 
 
