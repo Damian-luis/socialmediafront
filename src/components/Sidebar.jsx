@@ -64,6 +64,8 @@ export const Sidebar=()=>{
          localStorage.removeItem('name')
          localStorage.removeItem('lastname')
          localStorage.removeItem('urlProfile')
+         sessionStorage.removeItem('userId')
+         sessionStorage.removeItem('name')
          dispatch(finishSesion())
          dispatch(finishSession())
          navigate("/")

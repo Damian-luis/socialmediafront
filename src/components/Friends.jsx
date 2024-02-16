@@ -13,7 +13,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 export const Friends=()=>{
-  const id =localStorage.getItem('id')
+  const id =sessionStorage.getItem('userId')
   const [friends,setFriends]=useState(null)
   const [noFriends,setNoFriends]=useState(null)
   const getFriends=async()=>{

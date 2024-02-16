@@ -22,7 +22,7 @@ export const Home=()=>{
     const dispatch = useDispatch()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const id =localStorage.getItem('id')
+    const id =sessionStorage.getItem('userId')
     
     const mail=localStorage.getItem('mail')
     const friendsPosts = useSelector(state=>state.data.publicacionesAmigos)
@@ -79,7 +79,7 @@ export const Home=()=>{
    <div style={{
     width:"55%"
    }}>
-   {friendsPosts.length>0?friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion} urlProfile={e.urlProfile}  />})
+   {friendsPosts.length>0?friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion} urlProfile={e.urlProfile} friendsPosts={friendsPosts} />})
    :
    <SpinnerComponent/>
    

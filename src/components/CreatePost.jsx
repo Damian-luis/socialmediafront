@@ -10,10 +10,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios" 
 export const CreatePost=()=>{  
     
-    const name =localStorage.getItem("name");
-    const lastname =localStorage.getItem("lastname");
-    const id =localStorage.getItem("id");
-    const urlProfile =localStorage.getItem('urlProfile')
+    const name =sessionStorage.getItem("name");
+    const lastname =sessionStorage.getItem("lastname");
+    const id =sessionStorage.getItem('userId')
+    const urlProfile =sessionStorage.getItem('urlProfile')
     const dispatch=useDispatch()
     const [post,setPost]=useState({publicacion:""})
     const postHanlder=(e)=>{

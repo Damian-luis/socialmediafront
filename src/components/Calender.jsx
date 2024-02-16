@@ -10,29 +10,99 @@ import { Skeleton } from "@mui/material";
 import 'react-calendar/dist/Calendar.css';
 import styles from "./Calender.module.css"
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+//sockets
+import io from 'socket.io-client';
+
 export const Calender=()=>{
-  const id = useSelector(state=>state.userSelected.id)
-  const [date, setDate] = useState(new Date());
+  const name=sessionStorage.getItem('name');
+  const userId=sessionStorage.getItem('userId',);
+ // const destinatarioId = sessionStorage.getItem('userId');
+ // console.log(destinatarioId)
+  const serverUrl = 'http://localhost:3006';  
+  const socket = io(serverUrl);
+  const [selectedFriend, setSelectedFriend] = useState(null);
+
+
+  const [messages, setMessages] = useState([]);
+
+  const [message, setMessage] = useState('');
   
-  const theme = createTheme({
-    overrides: {
-      MuiPickersDay: {
-        day: {
-          fontSize: "16px", // ajusta el tamaño del número de la fecha
-        },
-        daySelected: {
-          backgroundColor: "#3f51b5", // ajusta el color de fondo del día seleccionado
-        },
-      },
-      MuiPickersCalendar: {
-        transitionContainer: {
-          display: "grid",
-          gridTemplateColumns: "repeat(7, 1fr)", // ajusta la distancia entre los días
-        },
-      },
-    },
-  });
+
+  useEffect(() => {
+    
+    socket.emit('join', { idUser: userId, name: name})
+    
+    socket.on('private_message', (data) => {
+      
+      setMessages((prevMessages) => [...prevMessages, data]);
+      console.log(data)
+    });
+
+    socket.on('ping', () => {
+      socket.emit('pong'); 
+    });
+
+
+    
+    return () => {
+      socket.disconnect();
+    };
+  }, []);  
+
+const sendMessage = () => {
+  console.log('Enviando mensaje privado:', { contenido: message, para: selectedFriend.idFollowed, de: userId });
+  if (message.trim() && selectedFriend) {
+    socket.emit('private_message', {
+      contenido: message,
+      para: selectedFriend.idFollowed,
+      de: userId,
+    });
+
+    const newMessage = {
+      contenido: message,
+      name: name,
+    };
+
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+    setMessage('');
+  }
+};
+
+
   
+
+  const id =sessionStorage.getItem('userId')
+  const [friends,setFriends]=useState(null)
+  
+  const getFriends=async()=>{
+      axios.get(`${process.env.REACT_APP_URL_BACKEND}/relationships/allFollows/`+id).then((e)=>{
+      
+        setFriends(e.data.friends)
+       // setNoFriends(e.data.noFriends)
+      })
+  } 
+  useEffect(()=>{
+    getFriends()
+
+    const fetchData = async () => {
+      try {
+        const userId = sessionStorage.getItem("userId");  // Obtén el ID del usuario desde donde lo tengas almacenado
+        const response = await axios.get(`${process.env.REACT_APP_URL_BACKEND}/messages/get/`+id)
+        console.log(response.data)
+        setMessages(response.data);
+      } catch (error) {
+        console.error("Error al obtener mensajes del usuario desde el backend:", error);
+      }
+    };
+  
+    fetchData();
+
+
+  },[])
+
+
     return (
         <div style={{
             
@@ -41,22 +111,48 @@ export const Calender=()=>{
             justifyContent:"center",
             height:"500px"
         }}>
-        <ThemeProvider theme={theme}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateCalendar
-          renderInput={(startProps, endProps) => (
-            <>
-              <input {...startProps.input} />
-              <span style={{ margin: "0 8px" }}>to</span>
-              <input {...endProps.input} />
-            </>
-          )}
-          startText="Start"
-          endText="End"
-          style={{ width: "100%", height: "600px" }}
+         elige un amigo para hablar<br/>
+         <div>
+  {friends &&
+    friends.map((e) => (
+      <div
+        key={e.idUser}
+        
+        onClick={() => setSelectedFriend({...e})}
+      >
+        {e.name} {e.idFollowed}
+      </div>
+    ))}
+</div>
+
+
+
+
+        
+
+
+
+        <div>
+      {/* Renderizar mensajes */}
+      <ul>
+        {messages.map((msg, index) => (
+          <li key={index}>
+            <strong>{msg.name}:</strong> {msg.contenido}
+          </li>
+        ))}
+      </ul>
+chat
+      {/* Entrada de mensaje y botón de envío */}
+      <div>
+        <input
+          type="text"
+          placeholder="escribe un mensaje"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
-      </LocalizationProvider>
-    </ThemeProvider>
+        <button onClick={sendMessage}>Enviar</button>
+      </div>
+    </div>
         </div>
       );
         

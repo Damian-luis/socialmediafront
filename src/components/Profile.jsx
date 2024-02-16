@@ -20,15 +20,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import { useEffect } from "react";
 export const Profile=()=>{
-  const id =localStorage.getItem('id')
-  const urlProfile =localStorage.getItem('urlProfile')
+  const id =sessionStorage.getItem('userId')
+  const urlProfile =sessionStorage.getItem('urlProfile')
   const [userData,setUserData]=useState(null)
   const [misPublicaciones,setMisPublicaciones]=useState([])
   const getData = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/getUserData/` + id);
-      console.log("intenta hacer peicion")
-      console.log(response)
+      
       setUserData(response.data);
       setMisPublicaciones(response.data.post)
       
