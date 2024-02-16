@@ -38,63 +38,99 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import moment from 'moment';
 import Paper from '@mui/material/Paper';
-
+import Menu from '@mui/material/Menu';
+import MenuItem from "@mui/material/MenuItem";
+import { deletePostData } from "../reducers/data/dataSlice";
+import useGetUserData from "../helpers/useGetUserData";
 export const PostCard=(props)=>{
- console.log(props)
+  console.log(props)
+  const id =localStorage.getItem('id')
+  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const handleEditPost = () => {
+    setIsEditing(true);
+    handleMenuClose();
+  };
+
+  const handleMenuOpen = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const [postLiked, setPostLiked] = useState({ like: false });
   const formattedTime = moment(`${props.date} ${props.time}`, 'DD/MM/YYYY HH:mm:ss').fromNow();
   const avatarInitial = `${props.nombre.charAt(0)}${props.apellido.charAt(0)}`;
     const idPublicacion=props.idPublicacion
     const urlProfile =localStorage.getItem('urlProfile')
-    const myId = localStorage.getItem("id")
+    const myId = sessionStorage.getItem('userId')
     const [show, setShow] = useState(false);
 
-  const handleCloseSend = async(e) => {
-    e.preventDefault()
-    await axios.put(`${process.env.REACT_APP_URL_BACKEND}/posts/updatePost/${myId}/${idPublicacion}`,post)
-        .then(e=>{
-          
-          if(e.data.status===true){
-            console.log("tosat wrokin")
-            console.log(e.data.message)
-            toast.info(`${e.data.message}`, {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                
-                });
-                
-        }
-        else{
-            toast.error(`${e.data.message}`, {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
-        }
-        })
-        setPost({
-          publicacion:props.publicacion,
-          nombre:name,
-          apellido:lastname,
-          id:myId,
-          idPublicacion:""
-        })
-    setShow(false)
-};
+    const handleUpdatePost = async () => {
+      try {
+        await axios.put(`${process.env.REACT_APP_URL_BACKEND}/posts/updatePost/${myId}/${idPublicacion}`, post);
+        toast.success('Cambios guardados exitosamente');
+        setIsEditing(false);
+      } catch (error) {
+        console.error(error);
+        toast.error('Error al guardar los cambios');
+      }
+    };
+  
+    const handleDeletePost = async() => {
+      try {
+        axios.delete(`${process.env.REACT_APP_URL_BACKEND}/posts/deletePost/${myId}/${idPublicacion}`);
+        await dispatch(deletePostData({ idPublicacion: props.idPublicacion }));
+        //const updatedUserData = useGetUserData(id);
+        toast.success('Publicación eliminada exitosamente');
+        console.log('Nuevo estado después de la eliminación:', props.friendsPosts);
+        
+      } catch (error) {
+        console.error(error);
+        toast.error('Error al eliminar la publicación');
+        
+      }
+    };
+    
+
+    const handleCloseSend = (action) => {
+      if (action === 'update') {
+        toast.confirm('¿Estás seguro de que quieres guardar los cambios?', {
+          position: "top-center",
+          autoClose: false,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          onClose: () => {
+            handleUpdatePost();
+          }
+        });
+      } else if (action === 'delete') {
+        toast.confirm('¿Estás seguro de que quieres eliminar esta publicación?', {
+          position: "top-center",
+          autoClose: false,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          onClose: () => {
+            handleDeletePost();
+          }
+        });
+      } else {
+        setAnchorEl(null);
+      }
+    }
+
 const handleClose=()=>{
   setShow(false)
 }
-  const handleShow = () => setShow(true);
+const handleShow = () => setShow(true);
     
     const name = useSelector(state=>state.user.name)
     const lastname = useSelector(state=>state.user.lastname)
@@ -129,14 +165,24 @@ const handleClose=()=>{
     const sendComment=async(e)=>{
         e.preventDefault()
         console.log(comment)
-        await axios.post(`${process.env.REACT_APP_URL_BACKEND}/interactions/commentPost/${props.idPublicacion}/${myId}/${name}/${lastname}`,{comment}).then(e=>{console.log(e.data.response)})
-        setComment("")
+        try{
+          await axios.post(`${process.env.REACT_APP_URL_BACKEND}/interactions/commentPost/${props.idPublicacion}/${myId}/${name}/${lastname}`,{comment}).then(e=>{console.log(e.data.response)})
+          setComment("")
+        }
+        catch(e){
+          console.log(e)
+        }
+        
     }
     const reactHandler=async(e)=>{
         e.preventDefault() 
-        
-        await axios.put(`${process.env.REACT_APP_URL_BACKEND}/interactions/reactPost/${props.idPublicacion}/${myId}/${name}/${lastname}`).then(e=>{console.log(e.data.response)})
-        setComment("")
+        try{
+          await axios.put(`${process.env.REACT_APP_URL_BACKEND}/interactions/reactPost/${props.idPublicacion}/${myId}/${name}/${lastname}`)
+          setPostLiked((prevPost) => ({ ...prevPost, like: !prevPost.like }));
+        }
+        catch(e){
+          console.log(e)
+        }
     }
     return <>
 <div style={{
@@ -154,20 +200,54 @@ const handleClose=()=>{
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <>
+            <IconButton aria-label="settings" onClick={handleMenuOpen}>
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+            >
+              {isEditing ? (
+            <>
+              <MenuItem onClick={() => handleCloseSend('update')}>Actualizar post</MenuItem>
+              <MenuItem onClick={() => handleCloseSend('delete')}>Eliminar post</MenuItem>
+            </>
+          ) : (
+            <MenuItem onClick={() => setIsEditing(true)}>Actualizar post</MenuItem>
+          )}
+          <MenuItem onClick={handleDeletePost}>Eliminar post</MenuItem>
+            </Menu>
+          </>
         }
         title={`${props.nombre} ${props.apellido}`}
         subheader={formattedTime}
       />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {props.publicacion}
-        </Typography>
-      </CardContent>
+
+{isEditing ? (
+    <TextField
+      value={post.publicacion}
+      onChange={(e) =>
+        setPost({
+          ...post,
+          publicacion: e.target.value,
+        })
+      }
+      multiline
+      fullWidth
+      rows={4}
+      variant="outlined"
+    />
+  ) : (
+    <CardContent>
+      <Typography variant="body2" color="text.secondary">
+        {props.publicacion}
+      </Typography>
+    </CardContent>
+  )}
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" style={{color:props.like===true?"red":"gray"}}>
+        <IconButton onClick={reactHandler} aria-label="add to favorites" style={{color: postLiked.like ? "red" : "gray"}}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
@@ -175,7 +255,7 @@ const handleClose=()=>{
         </IconButton>
       </CardActions>
     </Paper>
-<Card style={{with:"600px"}}>
+<Card style={{width:"600px"}}>
       
 
 
@@ -235,5 +315,9 @@ const handleClose=()=>{
 
     </Card>
     </div>
+    <div>
+        
+        <ToastContainer />
+      </div>
         </>
 }

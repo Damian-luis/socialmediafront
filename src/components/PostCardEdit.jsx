@@ -11,7 +11,7 @@ import axios from "axios"
 export const PostCardEdit=(props)=>{
   const name =useSelector(state=>state.user.name)
     const lastname =useSelector(state=>state.user.lastname)
-    const id =useSelector(state=>state.user.id)
+    const id =sessionStorage.getItem('userId')
     const idPublicacion=props.idPublicacion
     const dispatch=useDispatch()
     const [show, setShow] = useState(false);

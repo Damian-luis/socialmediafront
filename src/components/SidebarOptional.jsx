@@ -22,6 +22,7 @@ import { TiWeatherStormy } from "react-icons/ti";
 import { FaRegNewspaper } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaStore } from "react-icons/fa";
+import { FiMessageSquare } from "react-icons/fi";
 export const SidebarOptional=()=>{
 
   const requestOptions = {
@@ -98,7 +99,7 @@ export const SidebarOptional=()=>{
          navigate("/")
     }
     const calendarHandler=()=>{
-        navigate("/calendar")
+        navigate("/chats")
     }
     const storeHandler=()=>{
         navigate("/store")
@@ -112,7 +113,7 @@ export const SidebarOptional=()=>{
         <div className={styles.menu}>
             <ul>
                 <li onClick={newsHandler}><div><p className={styles.menuOption}>Noticias </p></div><div><FaRegNewspaper className={styles.menuLogo}/></div></li>
-                <li onClick={calendarHandler}><div><p className={styles.menuOption}>Calendario</p></div> <div><FaRegCalendarAlt className={styles.menuLogo}/></div></li>
+                <li onClick={calendarHandler}><div><p className={styles.menuOption}>Chats</p></div> <div><FiMessageSquare className={styles.menuLogo}/></div></li>
                 <li onClick={storeHandler}><div><p className={styles.menuOption}>Tienda</p></div><div><FaStore className={styles.menuLogo}/></div> </li>
                 
             </ul>

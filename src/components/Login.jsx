@@ -50,6 +50,10 @@ export const Login=()=>{
             localStorage.setItem('logged', true);
             localStorage.setItem('id', e.data.user[0].id);
             localStorage.setItem('urlProfile', e.data.user[0].urlProfile);
+            sessionStorage.setItem('userId', e.data.user[0].id);
+            sessionStorage.setItem('name', e.data.user[0].name);
+            sessionStorage.setItem('lastname', e.data.user[0].lastname)
+            sessionStorage.setItem('urlProfile', e.data.user[0].urlProfile)
             setUser({
               mail: "",
               password: ""
@@ -59,7 +63,7 @@ export const Login=()=>{
             setError(e.response.data.message);
           });
         } catch (error) {
-          setError(error.response.data.message);
+          //setError(error.response.data.message);
         } finally {
           setLoading(false);
         }

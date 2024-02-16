@@ -43,7 +43,7 @@ function App() {
         <Route path="/visit-profile" element={<Layout><VisitProfile/></Layout>}/>
         <Route path="/info" element={<Layout><Info/></Layout>}/>
         <Route path="/news" element={<Layout><News/></Layout>}/>
-        <Route path="/calendar" element={<Layout><Calender/></Layout>}/>
+        <Route path="/chats" element={<Layout><Calender/></Layout>}/>
         <Route path="/store" element={<Layout><Store/></Layout>}/>
         <Route path="/store/:id" element={<Layout><Product/></Layout>}/>
         {/*loggedIn===true?
