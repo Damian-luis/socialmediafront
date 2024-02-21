@@ -28,7 +28,7 @@ export const Calender=()=>{
   const userId=sessionStorage.getItem('userId',);
  // const destinatarioId = sessionStorage.getItem('userId');
  // console.log(destinatarioId)
-  const serverUrl = 'http://localhost:3006';  
+  const serverUrl = 'https://socialmediaback.vercel.app';  
   const socket = io(serverUrl);
   
   const [originalMessages, setOriginalMessages] = useState([])
