@@ -19,7 +19,10 @@ import { TiWeatherCloudy } from "react-icons/ti";
 import { TiWeatherDownpour } from "react-icons/ti";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { TiWeatherStormy } from "react-icons/ti";
+import io from 'socket.io-client';
 export const Sidebar=()=>{
+  const serverUrl = 'http://localhost:3006';
+    const socket = io(serverUrl);
     const [weatherData, setWeatherData] = useState(null);
     const [error, setError] = useState(null);
 
@@ -68,6 +71,7 @@ export const Sidebar=()=>{
          sessionStorage.removeItem('name')
          dispatch(finishSesion())
          dispatch(finishSession())
+         socket.disconnect();
          navigate("/")
     }
     const profileHandler=()=>{

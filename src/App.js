@@ -40,7 +40,7 @@ function App() {
         <Route path="/friends" element={<Layout><Friends/></Layout>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/search" element={<Layout><Search/></Layout>}/>
-        <Route path="/visit-profile" element={<Layout><VisitProfile/></Layout>}/>
+        <Route path="/visit-profile/:id" element={<Layout><VisitProfile/></Layout>}/>
         <Route path="/info" element={<Layout><Info/></Layout>}/>
         <Route path="/news" element={<Layout><News/></Layout>}/>
         <Route path="/chats" element={<Layout><Calender/></Layout>}/>

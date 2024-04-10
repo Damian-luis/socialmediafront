@@ -17,7 +17,8 @@ import SpinnerComponent  from "./Spinner"
 import useGetUserData from "../helpers/useGetUserData";
 export const Home=()=>{
   const isLogged=localStorage.getItem('logged')
-  
+  const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
     const [show, setShow] = useState(false);
     const dispatch = useDispatch()
     const handleClose = () => setShow(false);
@@ -29,8 +30,11 @@ export const Home=()=>{
  
     const getData = async() =>{
       try{
+        setLoading(true);
         const userData=await axios.get(`${process.env.REACT_APP_URL_BACKEND}/users/getUserData/`+id).then(e=>{
            
+          
+
           dispatch(addSesion({
             mail:e.data.user[0].mail,
             password:e.data.user[0].password,
@@ -81,8 +85,8 @@ export const Home=()=>{
    }}>
    {friendsPosts.length>0?friendsPosts.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion} urlProfile={e.urlProfile} friendsPosts={friendsPosts} />})
    :
-   <div style={{margin:"auto"}}>
-    <SpinnerComponent/>
+   <div style={{display:"flex",alignSelf:"center",justifyContent:"center",paddingTop:"200px"}}>
+    <SpinnerComponent />
    </div>
    
    

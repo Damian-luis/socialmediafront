@@ -13,6 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import { Link } from "react-router-dom";
 export const Search=()=>{
   const id =sessionStorage.getItem('userId')
  
@@ -39,13 +40,22 @@ export const Search=()=>{
     paddingLeft:"20px"
    }}>
     <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
-      <ListItem alignItems="flex-start">
+      <ListItem alignItems="flex-start"
+      component={Link}
+      to={`/visit-profile/${friend.id}`}>
         <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src={friend.urlProfile} style={{width:"60px",height:"60px"}} />
+                          <Avatar
+                          alt={`${friend.name} ${friend.lastname}`}
+                          src={friend.urlProfile}
+                          style={{ width: "60px", height: "60px" }}
+                        >
+                          {friend.urlProfile ? undefined : `${friend.name.charAt(0)}${friend.lastname.charAt(0)}`}
+                        </Avatar>
         </ListItemAvatar>
         <ListItemText
         style={{
-          paddingLeft:"30px"
+          paddingLeft:"30px",
+          color:"black"
         }}
           primary={`${friend.name} ${friend.lastname}`}
           secondary={

@@ -12,16 +12,23 @@ import {FaUserGraduate} from "react-icons/fa"
 import {AiFillMail} from "react-icons/ai"
 import {AiFillEdit} from "react-icons/ai"
 import {RiCake2Fill} from "react-icons/ri"
+import { useParams } from 'react-router-dom';import Avatar from '@mui/material/Avatar';
+
 export const VisitProfile=()=>{
-  const id = useSelector(state=>state.userSelected.id)
-  
+  //const id = useSelector(state=>state.userSelected.id)
+  const { id } = useParams();
   const [dataUser,setDataUser]=useState({
     name:"",
     lastname:"",
     mail:"",
     date:"",
     time:"",
-    id:""
+    id:"",
+    birthday:"",
+    country:"",
+    liveCountry:"",
+    urlProfile:"",
+    ocupation:""
 
   })
   const [post,setPost] = useState([])
@@ -57,7 +64,11 @@ export const VisitProfile=()=>{
    <div className={styles.portada}>
       <div className={styles.portadaUp}>
         
-        <div className={styles.portadaUpInside}><div className={styles.nombre}><h1>{dataUser.name} {dataUser.lastname}</h1></div><div className={styles.editProfile}>  </div></div>
+        <div className={styles.portadaUpInside}>
+        <Avatar alt="Imagen de perfil" src={dataUser.urlProfile} style={{ width: "60px", height: "60px",marginRight:"20px" }}>
+            {dataUser.urlProfile ? undefined : `${dataUser.name.charAt(0)}${dataUser.lastname.charAt(0)}`}
+          </Avatar>
+          <div className={styles.nombre}><h1>{dataUser.name} {dataUser.lastname}</h1></div><div className={styles.editProfile}>  </div></div>
       </div>
       <div className={styles.portadaDown}>
         <div className={styles.detalles}>
