@@ -42,9 +42,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from "@mui/material/MenuItem";
 import { deletePostData } from "../reducers/data/dataSlice";
 import useGetUserData from "../helpers/useGetUserData";
+
 export const PostCard=(props)=>{
-  console.log(props)
-  const id =localStorage.getItem('id')
+ 
+  
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -60,13 +61,16 @@ export const PostCard=(props)=>{
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-  const [postLiked, setPostLiked] = useState({ like: false });
+  
   const formattedTime = moment(`${props.date} ${props.time}`, 'DD/MM/YYYY HH:mm:ss').fromNow();
   const avatarInitial = `${props.nombre.charAt(0)}${props.apellido.charAt(0)}`;
     const idPublicacion=props.idPublicacion
     const urlProfile =localStorage.getItem('urlProfile')
     const myId = sessionStorage.getItem('userId')
     const [show, setShow] = useState(false);
+    
+    const [postLiked, setPostLiked] = useState({ like: props.like });
+  const [likeCount, setLikeCount] = useState(props.usersLinked.length);
 
     const handleUpdatePost = async () => {
       try {
@@ -179,6 +183,13 @@ const handleShow = () => setShow(true);
         try{
           await axios.put(`${process.env.REACT_APP_URL_BACKEND}/interactions/reactPost/${props.idPublicacion}/${myId}/${name}/${lastname}`)
           setPostLiked((prevPost) => ({ ...prevPost, like: !prevPost.like }));
+          const newLikeCount = likeCount + (postLiked.like ? -1 : 1);
+      
+     
+          setPostLiked({ like: !postLiked.like });
+      
+          
+          setLikeCount((prevCount) => (postLiked.like ? prevCount - 1 : prevCount + 1));
         }
         catch(e){
           console.log(e)
@@ -187,7 +198,7 @@ const handleShow = () => setShow(true);
     return <>
 <div style={{
   margin:"20px",
-  width:"500px"
+  width:"500px",
 }}>
 <Paper elevation={12}>
 <CardHeader
@@ -247,7 +258,7 @@ const handleShow = () => setShow(true);
     </CardContent>
   )}
       <CardActions disableSpacing>
-        <IconButton onClick={reactHandler} aria-label="add to favorites" style={{color: postLiked.like ? "red" : "gray"}}>
+       {likeCount}<IconButton onClick={reactHandler} aria-label="add to favorites" style={{color: postLiked.like ? "red" : "gray"}}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">

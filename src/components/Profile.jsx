@@ -19,9 +19,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import { useEffect } from "react";
+import Avatar from '@mui/material/Avatar';
 export const Profile=()=>{
+  const name =sessionStorage.getItem("name");
+    const lastname =sessionStorage.getItem("lastname");
   const id =sessionStorage.getItem('userId')
   const urlProfile =sessionStorage.getItem('urlProfile')
+   const [uploadButtonVisible, setUploadButtonVisible] = useState(false);
   const [userData,setUserData]=useState(null)
   const [misPublicaciones,setMisPublicaciones]=useState([])
   const getData = async () => {
@@ -124,17 +128,54 @@ const fileHandler=(e)=>{
 
     <div className={styles.portada}>
       <div className={styles.portadaUp}>
-        <div> 
+        <div style={{
+          width:"100%",
+          
+        }}> 
+        <div style={{
+          display:"flex",
+          justifyContent:"space-between"
+        }}>
+          <div style={{
+            display:"flex"
+          }}>
+          <Avatar alt="Imagen de perfil" src={urlProfile} style={{
+            width:"60px",
+            height:"60px",
+            marginRight:"20px"
+          }}>
+            {urlProfile ? undefined : `${name.charAt(0)}${lastname.charAt(0)}`}
+          </Avatar>
+          <h1>{myInfo.name} {myInfo.lastname}</h1> 
+          </div>
+          <div>
+          <Button variant="secondary" onClick={handleEditProfile}><AiFillEdit/> Editar perfil</Button>
+          </div>
+        
+          
+          
+          </div>
+          
+             
           <form onSubmit={sendFile}>
-          <img src={urlProfile} className={styles.picture}/>
+          <div style={{
+            left:"0px"
+          }}>
           <label for="file-input" class="custom-file-upload">
             Cambiar foto
           </label>
+          </div>
+          
           <input type="file" onChange={fileHandler} id="file-input" className={styles.inputFile}></input>
-          <Button variant="secondary" onClick={sendFile}>Subir</Button>
+          {file && (
+              <Button variant="contained" onClick={sendFile}>
+                Subir
+              </Button>
+            )}
+          
           </form>
           </div> 
-        <div className={styles.portadaUpInside}><div className={styles.nombre}><h1>{myInfo.name} {myInfo.lastname}</h1></div><div className={styles.editProfile}> <Button variant="secondary" onClick={handleEditProfile}><AiFillEdit/> Editar perfil</Button> </div></div>
+        
       </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

@@ -28,7 +28,7 @@ export const Calender=()=>{
   const userId=sessionStorage.getItem('userId',);
  // const destinatarioId = sessionStorage.getItem('userId');
  // console.log(destinatarioId)
-  const serverUrl = 'https://socialmediaback.vercel.app';  
+  const serverUrl = 'http://localhost:3006';  
   const socket = io(serverUrl);
   
   const [originalMessages, setOriginalMessages] = useState([])
@@ -40,7 +40,7 @@ export const Calender=()=>{
 
   useEffect(() => {
     
-    socket.emit('join', { idUser: userId, name: name})
+    //ocket.emit('join', { idUser: userId, name: name})
     
     socket.on('private_message', (data) => {
       if (data.contenido && data.para && data.de) {
@@ -56,7 +56,7 @@ export const Calender=()=>{
       
     });
 
-    socket.on('ping', () => {
+   /* socket.on('ping', () => {
       socket.emit('pong'); 
     });
 
@@ -64,7 +64,7 @@ export const Calender=()=>{
     
     return () => {
       socket.disconnect();
-    };
+    };*/
   }, []);  
 
 const sendMessage = () => {

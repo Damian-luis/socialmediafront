@@ -12,6 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import { Link } from "react-router-dom";
 export const Friends=()=>{
   const id =sessionStorage.getItem('userId')
   const [friends,setFriends]=useState(null)
@@ -36,14 +37,18 @@ export const Friends=()=>{
    {friends&& friends.map((friend)=>{return <div style={{
     paddingLeft:"20px"
    }}>
-    <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
-      <ListItem alignItems="flex-start">
+    <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper', }}>
+      <ListItem alignItems="flex-start"
+      component={Link}
+      to={`/visit-profile/${friend.idUser}`}
+      >
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src={friend.urlProfile} style={{width:"60px",height:"60px"}} />
         </ListItemAvatar>
         <ListItemText
         style={{
-          paddingLeft:"30px"
+          paddingLeft:"30px",
+          color:"black"
         }}
           primary={`${friend.name} ${friend.lastname}`}
           secondary={

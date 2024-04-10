@@ -15,8 +15,10 @@ import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress from '@mui/material/LinearProgress';
 import Backdrop from '@mui/material/Backdrop';
+import io from 'socket.io-client';
 export const Login=()=>{
-  
+  const serverUrl = 'http://localhost:3006';
+      const socket = io(serverUrl);
   const [showAlert, setShowAlert] = useState(false);
   const [loading, setLoading] = useState(false);
     const dispatch = useDispatch()
@@ -44,6 +46,15 @@ export const Login=()=>{
           setLoading(true); 
     
           await axios.post(`${process.env.REACT_APP_URL_BACKEND}/users/login`, user).then(e => {
+
+            
+      socket.emit('join', { idUser: e.data.user[0].id, name: e.data.user[0].name });
+
+
+
+            socket.on('ping', () => {
+              socket.emit('pong'); 
+            })
             localStorage.setItem('name', e.data.user[0].name);
             localStorage.setItem('lastname', e.data.user[0].lastname);
             localStorage.setItem('mail', e.data.user[0].mail);

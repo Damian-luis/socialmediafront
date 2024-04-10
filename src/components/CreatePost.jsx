@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import useGetUserData from "../helpers/useGetUserData";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios" 
+import Avatar from '@mui/material/Avatar';
 export const CreatePost=()=>{  
     
     const name =sessionStorage.getItem("name");
@@ -71,7 +72,12 @@ export const CreatePost=()=>{
     return <>
     <div className={styles.formContainer}>
         <div className={styles.formContainerLeft}>
-        <img src={urlProfile} className={styles.picture}></img>
+        <Avatar alt="Imagen de perfil" src={urlProfile} style={{
+            width:"60px",height:"60px"
+        }}>
+            {urlProfile ? undefined : `${name.charAt(0)}${lastname.charAt(0)}`}
+          </Avatar>
+        
         </div>
         <div className={styles.formContainerRight}>
     <form className={styles.form} onSubmit={sendPost}>
