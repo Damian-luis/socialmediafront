@@ -199,7 +199,11 @@ const handleShow = () => setShow(true);
   margin:"20px",
   width:"500px",
 }}>
-<Paper elevation={12}>
+<Paper elevation={12}
+style={{
+  padding:"22px"
+}}
+>
 <CardHeader
         avatar={
           <Avatar
@@ -272,8 +276,8 @@ const handleShow = () => setShow(true);
           <ShareIcon />
         </IconButton>
       </CardActions>
-    </Paper>
-<Card style={{width:"600px"}}>
+    
+      <Card style={{borderRadius:"0px"}}>
       
 
 
@@ -298,10 +302,14 @@ const handleShow = () => setShow(true);
         
         
       </CardContent>
-
+      
       </div>})}
 
-      <FormControl variant="standard" style={{display:"flex",flexDirection:"row",justifyContent:"space-around"}}>
+      
+
+    </Card>
+
+    <FormControl variant="standard" style={{display:"flex",flexDirection:"row",justifyContent:"space-around",padding:"10px"}}>
         <TextField
         id="input-with-icon-textfield"
         placeholder="Escribe un comentario"
@@ -331,10 +339,12 @@ const handleShow = () => setShow(true);
                   </IconButton>
         </FormControl>
 
-    </Card>
+    </Paper>
+
     </div>
     <div>
         
+    
         <ToastContainer />
       </div>
         </>
