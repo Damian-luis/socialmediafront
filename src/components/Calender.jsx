@@ -7,7 +7,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { Skeleton } from "@mui/material";
-import 'react-calendar/dist/Calendar.css';
+import 'react-calendar/dist/Calendar.css'; 
 import styles from "./Calender.module.css"
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import List from '@mui/material/List';
@@ -74,6 +74,7 @@ const sendMessage = () => {
       contenido: message,
       para: selectedFriend.idFollowed,
       de: userId,
+      seen: false
     });
 
     const newMessage = {
@@ -95,9 +96,12 @@ const sendMessage = () => {
   
   const getFriends=async()=>{
       axios.get(`${process.env.REACT_APP_URL_BACKEND}/relationships/allFollows/`+id).then((e)=>{
-      console.log(e.data)
-        setFriends(e.data.friends)
-       // setNoFriends(e.data.noFriends)
+      
+        const friendsWithCount = e.data.friends.map(friend => {
+          const unseenCount = messages.filter(msg => msg.to === id && msg.from === friend.idFollowed && !msg.seen).length;
+          return { ...friend, unseenCount };
+        });
+        setFriends(friendsWithCount);
       })
   } 
 
@@ -112,13 +116,27 @@ const sendMessage = () => {
     const fetchData = async () => {
       try {
         const userId = sessionStorage.getItem("userId");
-        const response = await axios.get(`${process.env.REACT_APP_URL_BACKEND}/messages/get/`+id)
-        setMessages(response.data);
-        setOriginalMessages(response.data)
+        const response = await axios.get(`${process.env.REACT_APP_URL_BACKEND}/messages/get/` + id);
+       
+        // Filter messages to show only unseen messages for the user
+        const unseenMessages = response.data.filter(msg => msg.to === id && !msg.seen);
+        if (friends) {
+          const updatedFriends = friends.map(friend => {
+            const unseenCount = unseenMessages.filter(msg => msg.from === friend.idFollowed).length;
+            return { ...friend, unseenCount };
+          });
+          setFriends(updatedFriends); 
+        }
+        setMessages(unseenMessages);
+        setOriginalMessages(response.data);
+        
+        // Update friend list with unseen message count (optional)
+        
       } catch (error) {
         console.error("Error al obtener mensajes del usuario desde el backend:", error);
       }
     };
+    
   
     fetchData();
 
@@ -127,7 +145,8 @@ const sendMessage = () => {
 
 
  
-  const handleFriendClick = (friend) => {
+  const handleFriendClick = async (friend) => {
+    console.log("entra a controlador friend click")
     setSelectedFriend({ 
       idFollowed: friend.idFollowed,
       name:friend.name,
@@ -135,7 +154,17 @@ const sendMessage = () => {
       urlProfile: friend.urlProfile,
       mail:friend.mail });
     filterMessagesByFriend(friend.idFollowed);
+    
+    // Emit "seen message" event for all unseen messages from this friend
+    const unseenMessages = messages.filter(msg => msg.from === friend.idFollowed && !msg.seen);
+    const unseenMessageIds = unseenMessages.map(msg => msg.id);  // Extract unseen message IDs
+    
+    console.log(unseenMessages)
+    if (unseenMessageIds.length > 0) {
+      await socket.emit('seenMessages', unseenMessageIds);  // Emit event with unseen message IDs
+    }
   };
+  
   
   const filterMessagesByFriend = (friendId) => {
     // Filtra los mensajes según el amigo seleccionado
@@ -171,37 +200,56 @@ const sendMessage = () => {
          <div>
 
           
-         {friends&& friends.map((friend)=>{return <div onClick={() => handleFriendClick(friend)} style={{
-    paddingLeft:"20px"
-   }}>
-    <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src={friend.urlProfile} style={{width:"50px",height:"50px"}} />
-        </ListItemAvatar>
-        <ListItemText
-        style={{
-          paddingLeft:"30px"
-        }}
-          primary={`${friend.name} ${friend.lastname}`}
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                {friend.mail}
-              </Typography>
-              
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-    </List>
-   </div>})}
+         {friends && (
+  <>
+    {friends.map((friend) => (
+      <div onClick={() => handleFriendClick(friend)} style={{ paddingLeft: "20px" }}>
+        <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
+          <ListItem alignItems="flex-start">
+           {console.log(`Friend: ${friend.name} - Unseen Count: ${friend.unseenCount}`)}
+            <ListItemAvatar>
+              <Avatar alt="Remy Sharp" src={friend.urlProfile} style={{ width: "50px", height: "50px" }} />
+            </ListItemAvatar>
+            <ListItemText
+              style={{
+                paddingLeft: "30px"
+              }}
+              primary={`${friend.name} ${friend.lastname}`}
+              secondary={
+                <React.Fragment>
+                  {/* Ensure friend.mail exists before rendering */}
+                  {friend.mail && (
+                    <Typography
+                      sx={{ display: 'inline' }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      {friend.mail}
+                    </Typography>
+                  )}
+                  {/* Conditionally render unseen message count */}
+                  {friend.unseenCount > 0 && (
+                    <span style={{ color: 'red', marginLeft: '10px' }}>
+                      {friend.unseenCount} nuevo(s) mensaje(s)
+                    </span>
+                  )}
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+        </List>
+      </div>
+    ))}
+  </>
+)}
+
+
+
+
+
+
 </div>
 
 

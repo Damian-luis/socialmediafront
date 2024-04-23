@@ -45,7 +45,6 @@ import useGetUserData from "../helpers/useGetUserData";
 
 export const PostCard=(props)=>{
  
-  
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -211,26 +210,34 @@ const handleShow = () => setShow(true);
           </Avatar>
         }
         action={
-          <>
-            <IconButton aria-label="settings" onClick={handleMenuOpen}>
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleMenuClose}
-            >
-              {isEditing ? (
+          myId === props.idUser && (
             <>
-              <MenuItem onClick={() => handleCloseSend('update')}>Actualizar post</MenuItem>
-              <MenuItem onClick={() => handleCloseSend('delete')}>Eliminar post</MenuItem>
+              <IconButton aria-label="settings" onClick={handleMenuOpen}>
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+              >
+                {isEditing ? (
+                  <>
+                    <MenuItem onClick={() => handleCloseSend("update")}>
+                      Actualizar post
+                    </MenuItem>
+                    <MenuItem onClick={() => handleCloseSend("delete")}>
+                      Eliminar post
+                    </MenuItem>
+                  </>
+                ) : (
+                  <MenuItem onClick={() => setIsEditing(true)}>
+                    Actualizar post
+                  </MenuItem>
+                )}
+                <MenuItem onClick={handleDeletePost}>Eliminar post</MenuItem>
+              </Menu>
             </>
-          ) : (
-            <MenuItem onClick={() => setIsEditing(true)}>Actualizar post</MenuItem>
-          )}
-          <MenuItem onClick={handleDeletePost}>Eliminar post</MenuItem>
-            </Menu>
-          </>
+          )
         }
         title={`${props.nombre} ${props.apellido}`}
         subheader={formattedTime}
