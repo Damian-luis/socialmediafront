@@ -19,7 +19,6 @@ export const Friends=()=>{
   const [noFriends,setNoFriends]=useState(null)
   const getFriends=async()=>{
       axios.get(`${process.env.REACT_APP_URL_BACKEND}/relationships/allFollows/`+id).then((e)=>{
-      
         setFriends(e.data.friends)
        // setNoFriends(e.data.noFriends)
       })
@@ -40,7 +39,7 @@ export const Friends=()=>{
     <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper', }}>
       <ListItem alignItems="flex-start"
       component={Link}
-      to={`/visit-profile/${friend.idUser}`}
+      to={`/visit-profile/${friend.idFollowed}`}
       >
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src={friend.urlProfile} style={{width:"60px",height:"60px"}} />
