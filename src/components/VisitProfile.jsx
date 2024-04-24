@@ -100,7 +100,7 @@ export const VisitProfile=()=>{
 
    
   <div className={styles.publicaciones}>
-   {post && post.map(e=>{return <PostCard publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})}
+   {post && post.map(e=>{return <PostCard urlProfile={dataUser.urlProfile} publicacion={e.publicacion} nombre={e.nombre} apellido={e.apellido} id={e.idUser} date={e.date} time={e.time} like={e.like} usersComments={e.usersComments} usersLinked={e.usersLinked} idPublicacion={e.idPublicacion}/>})}
   </div>
   
    </div>

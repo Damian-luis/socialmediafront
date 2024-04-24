@@ -44,7 +44,7 @@ import { deletePostData } from "../reducers/data/dataSlice";
 import useGetUserData from "../helpers/useGetUserData";
 
 export const PostCard=(props)=>{
- 
+ console.log(props)
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -210,7 +210,7 @@ style={{
             src={props.urlProfile ? props.urlProfile : undefined}
             alt={`${props.nombre} ${props.apellido}`}
           >
-            {props.urlProfile ? undefined : avatarInitial}
+            {/*props.urlProfile ? urlProfile : avatarInitial*/}
           </Avatar>
         }
         action={
